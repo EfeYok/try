@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Sistemi</title>
+    <link rel="icon" type="image/png" href="file:///C:/Users/Baken/Desktop/bocci/pixil-frame-0.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #cfd8ff 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.164);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 7px #111111;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            box-sizing: border-box;
+            font-size: 14px;
+            background-color: #ffffff52;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-login {
+            background: #667eea;
+            color: white;
+            border-radius: 20px;
+        }
+
+        .btn-login:hover {
+            background: #5568d3;
+        }
+
+        .btn-register {
+            background: #48bb78;
+            color: white;
+            border-radius: 20px;
+        }
+
+        .btn-register:hover {
+            background: #38a169;
+        }
+
+        .message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .error {
+            background: #fed7d7;
+            color: #c53030;
+            display: block;
+        }
+
+        .success {
+            background: #c6f6d5;
+            color: #2f855a;
+            display: block;
+        }
+
+        .toggle {
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            text-shadow: 2px 2px 7px #111111;
+        }
+
+        .toggle a {
+            color: #18d0e9;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .toggle a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Giriş Formu -->
+        <div id="loginForm">
+            <h2>Giriş Yap</h2>
+            <input type="text" id="loginNick" placeholder="Kullanıcı Adı">
+            <input type="password" id="loginSifre" placeholder="Şifre">
+            <div id="loginMessage" class="message"></div>
+            <button class="btn-login" onclick="girisYap()">Giriş Yap</button>
+            <div class="toggle">
+                Hesabın yok mu? <a onclick="formDegistir('register')">Kayıt Ol</a>
+            </div>
+        </div>
+
+        <!-- Kayıt Formu -->
+        <div id="registerForm" class="hidden">
+            <h2>Kayıt Ol</h2>
+            <input type="text" id="registerNick" placeholder="Kullanıcı Adı">
+            <input type="password" id="registerSifre" placeholder="Şifre">
+            <input type="password" id="registerSifreTekrar" placeholder="Şifre Tekrar">
+            <div id="registerMessage" class="message"></div>
+            <button class="btn-register" onclick="kayitOl()">Kayıt Ol</button>
+            <div class="toggle">
+                Zaten hesabın var mı? <a onclick="formDegistir('login')">Giriş Yap</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        // Sayfa yüklendiğinde kontrol
+        window.onload = function() {
+            initUserData();
+            
+            // Eğer zaten giriş yapılmışsa ana sayfaya yönlendir
+            const user = getCurrentUser();
+            if (user) {
+                window.location.href = 'main.html';
+            }
+        };
+
+        function formDegistir(form) {
+            if (form === 'register') {
+                document.getElementById('loginForm').classList.add('hidden');
+                document.getElementById('registerForm').classList.remove('hidden');
+            } else {
+                document.getElementById('registerForm').classList.add('hidden');
+                document.getElementById('loginForm').classList.remove('hidden');
+            }
+            document.getElementById('loginMessage').style.display = 'none';
+            document.getElementById('registerMessage').style.display = 'none';
+        }
+
+        function showMessage(elementId, message, isSuccess) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            el.className = isSuccess ? 'message success' : 'message error';
+        }
+
+        function kayitOl() {
+            const nick = document.getElementById('registerNick').value.trim();
+            const sifre = document.getElementById('registerSifre').value;
+            const sifreTekrar = document.getElementById('registerSifreTekrar').value;
+
+            if (!nick || !sifre || !sifreTekrar) {
+                showMessage('registerMessage', 'Tüm alanları doldurun!', false);
+                return;
+            }
+
+            if (sifre !== sifreTekrar) {
+                showMessage('registerMessage', 'Şifreler eşleşmiyor!', false);
+                return;
+            }
+
+            if (sifre.length < 4) {
+                showMessage('registerMessage', 'Şifre en az 4 karakter olmalı!', false);
+                return;
+            }
+
+            const result = registerUser(nick, sifre);
+            showMessage('registerMessage', result.message, result.success);
+
+            if (result.success) {
+                setTimeout(() => {
+                    formDegistir('login');
+                    document.getElementById('loginNick').value = nick;
+                }, 2000);
+            }
+        }
+
+        function girisYap() {
+            const nick = document.getElementById('loginNick').value.trim();
+            const sifre = document.getElementById('loginSifre').value;
+
+            if (!nick || !sifre) {
+                showMessage('loginMessage', 'Kullanıcı adı ve şifre gerekli!', false);
+                return;
+            }
+
+            const result = loginUser(nick, sifre);
+            showMessage('loginMessage', result.message, result.success);
+
+            if (result.success) {
+                setCurrentUser(nick);
+                setTimeout(() => {
+                    window.location.href = 'main.html';
+                }, 1000);
+            }
+        }
+
+        // Enter tuşu ile giriş
+        document.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const loginForm = document.getElementById('loginForm');
+                if (!loginForm.classList.contains('hidden')) {
+                    girisYap();
+                } else {
+                    kayitOl();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

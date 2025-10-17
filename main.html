@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Sayfa</title>
+    <link rel="icon" type="image/png" href="file:///C:/Users/Baken/Desktop/bocci/bocciweb.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #cfd8ff 0%, #ff85f9 100%);
+        }
+
+        a {
+            text-shadow: 2px 2px 7px #111111;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="navbar">
+            <div class="navbar-brand">🎀 Anasayfa</div>
+            <div class="navbar-user" id="navbarUser"></div>
+        </div>
+
+        <div class="content-box">
+            <h2 id="welcomeMessage"></h2>
+            <p style="text-align: center; color: white; text-shadow: 1px 1px 5px #111111; margin-bottom: 30px;">
+                Sistemimize başarıyla giriş yaptın.
+            </p>
+
+            <div class="button-group" id="menuButtons"></div>
+        </div>
+        <div id="two">
+            <h3 id="dort">Coming soon...</h3>
+            <br/>
+            <hr/>
+            <br/>
+            <p>
+                <img src="file:///C:/Users/Baken/Desktop/bocci/BocchiSticker.png" alt="emoji"
+                    style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
+                Üniversite projem: <a style="color:rgb(75, 75, 75)">(Hâlâ yapım aşamasında)</a>
+            </p>
+            <p align="center">
+                <img src="file:///C:/Users/Baken/Desktop/kmulogo.png" alt="emoji"
+                    style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
+                <a href="file:///C:/Users/Baken/Desktop/karamanExp/index.html"
+                style="color:#002fff">Karaman Express</a>
+            </p>
+        </div>
+        <div id="two">
+            <p>
+                <img src="file:///C:/Users/Baken/Desktop/UYGS/UYGS LOGO.png" alt="emoji"
+                    style="width: 32px; height: 32px; vertical-align: middle; margin-right: 5px;">
+                <a href="https://shopier.com/uygunasatisplus" style="color:rgb(255, 217, 49)">Uyguna Satış Mağaza</a>
+            </p>
+            <p>
+                <img src="file:///C:/Users/Baken/Desktop/insta.webp" alt="emoji" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 5px;">
+                <a href="link" style="color:#ff0022">İnstagram</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        window.onload = function () {
+            initUserData();
+
+            // Giriş kontrolü
+            const currentUser = getCurrentUser();
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Kullanıcı bilgilerini göster
+            const isAdmin = checkIsAdmin(currentUser);
+            document.getElementById('welcomeMessage').textContent = `Hoş Geldin, ${currentUser}! 👋`;
+
+            const navbarUser = document.getElementById('navbarUser');
+            navbarUser.innerHTML = `
+                ${currentUser}
+                ${isAdmin ? '<span class="admin-badge">👑 Admin</span>' : ''}
+            `;
+
+            // Menü butonları
+            const menuButtons = document.getElementById('menuButtons');
+            let buttonsHTML = `
+                <button class="btn-info" onclick="window.location.href='profile.html'">👤 Profilim</button>
+            `;
+
+            if (isAdmin) {
+                buttonsHTML += `<button class="btn-warning" onclick="window.location.href='admin-panel.html'">⚙️ Admin Panel</button>`;
+            }
+
+            buttonsHTML += `<button class="btn-danger" onclick="cikisYap()">🚪 Çıkış Yap</button>`;
+
+            menuButtons.innerHTML = buttonsHTML;
+        };
+
+        function cikisYap() {
+            logout();
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>

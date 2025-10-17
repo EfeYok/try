@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="icon" type="image/png" href="file:///C:/Users/Baken/Desktop/bocci/bocciweb_y.png">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #fdff84 0%, #aa7b14 100%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="navbar">
+            <div class="navbar-brand">⚙️ Admin Panel</div>
+            <div class="navbar-user" id="navbarUser"></div>
+        </div>
+
+        <div class="stats" id="statsContainer"></div>
+
+        <div class="content-box">
+            <h2>👥 Kullanıcı Yönetimi</h2>
+            <div id="adminMessage" class="message"></div>
+            
+            <div id="userTableContainer"></div>
+
+            <div class="button-group" style="margin-top: 30px;">
+                <button class="btn-info" onclick="window.location.href='main.html'">🏠 Ana Sayfa</button>
+                <button class="btn-info" onclick="window.location.href='profile.html'">👤 Profilim</button>
+                <button class="btn-danger" onclick="cikisYap()">🚪 Çıkış Yap</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        let currentUser = null;
+
+        window.onload = function() {
+            initUserData();
+            
+            // Giriş kontrolü
+            currentUser = getCurrentUser();
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Admin kontrolü
+            if (!checkIsAdmin(currentUser)) {
+                alert('Bu sayfaya erişim yetkiniz yok!');
+                window.location.href = 'main.html';
+                return;
+            }
+
+            // Kullanıcı bilgilerini göster
+            const navbarUser = document.getElementById('navbarUser');
+            navbarUser.innerHTML = `
+                ${currentUser}
+                <span class="admin-badge">👑 Admin</span>
+            `;
+
+            loadUserData();
+        };
+
+        function loadUserData() {
+            const users = getAllUsers();
+            const totalUsers = users.length;
+            const totalAdmins = users.filter(u => u.isAdmin).length;
+
+            // İstatistikleri göster
+            const statsContainer = document.getElementById('statsContainer');
+            statsContainer.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-number">${totalUsers}</div>
+                    <div class="stat-label">Toplam Kullanıcı</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">${totalAdmins}</div>
+                    <div class="stat-label">Admin Sayısı</div>
+                </div>
+            `;
+
+            // Kullanıcı tablosunu oluştur
+            const userTableContainer = document.getElementById('userTableContainer');
+            userTableContainer.innerHTML = `
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Kullanıcı Adı</th>
+                            <th>Yetki</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${users.map(user => `
+                            <tr>
+                                <td>${user.username}</td>
+                                <td>${user.isAdmin ? '👑 Admin' : '👤 Kullanıcı'}</td>
+                                <td>
+                                    ${!user.isAdmin ? 
+                                        `<button class="btn-warning" style="padding: 8px 16px; margin: 0 5px;" onclick="adminYetkisiVer('${user.username}')">Admin Yap</button>` : 
+                                        (user.username !== 'admin' ? `<button class="btn-info" style="padding: 8px 16px; margin: 0 5px;" onclick="adminYetkisiAl('${user.username}')">Yetkiyi Al</button>` : '')
+                                    }
+                                    ${user.username !== 'admin' ? 
+                                        `<button class="btn-danger" style="padding: 8px 16px; margin: 0 5px;" onclick="kullaniciSil('${user.username}')">Sil</button>` : 
+                                        ''
+                                    }
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function showMessage(message, isSuccess) {
+            const el = document.getElementById('adminMessage');
+            el.textContent = message;
+            el.className = isSuccess ? 'message success' : 'message error';
+        }
+
+        function adminYetkisiVer(username) {
+            const result = giveAdminPermission(username);
+            showMessage(result.message, result.success);
+            if (result.success) {
+                setTimeout(() => loadUserData(), 1000);
+            }
+        }
+
+        function adminYetkisiAl(username) {
+            const result = removeAdminPermission(username);
+            showMessage(result.message, result.success);
+            if (result.success) {
+                setTimeout(() => loadUserData(), 1000);
+            }
+        }
+
+        function kullaniciSil(username) {
+            if (confirm(`${username} kullanıcısını silmek istediğinize emin misiniz?`)) {
+                const result = deleteUser(username);
+                showMessage(result.message, result.success);
+                if (result.success) {
+                    setTimeout(() => loadUserData(), 1000);
+                }
+            }
+        }
+
+        function cikisYap() {
+            logout();
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>
