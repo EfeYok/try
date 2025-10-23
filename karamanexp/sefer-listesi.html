@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karaman Express - Sefer Listesi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-600 to-blue-400">
+    <!-- Header -->
+    <div class="bg-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <button onclick="window.location.href='index.html'" class="flex items-center gap-3 hover:opacity-80 transition">
+                    <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <h1 class="text-2xl font-bold text-gray-800">Karaman Express</h1>
+                </button>
+                <div class="text-sm text-gray-600">
+                    📞 0850 123 45 67
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Breadcrumb & Back -->
+    <div class="bg-white/10 backdrop-blur-sm border-b border-white/20">
+        <div class="container mx-auto px-4 py-3">
+            <button onclick="window.location.href='index.html'" class="text-white hover:text-blue-200 flex items-center gap-2 transition">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                <span class="font-medium">Yeni Arama</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Arama Özeti -->
+        <div class="max-w-5xl mx-auto mb-8">
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-gray-800" id="from-city"></div>
+                            <div class="text-xs text-gray-600">KALKIŞ</div>
+                        </div>
+                        <div class="flex flex-col items-center gap-1">
+                            <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                            <div class="text-xs text-gray-600 font-medium" id="route-distance"></div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-gray-800" id="to-city"></div>
+                            <div class="text-xs text-gray-600">VARIŞ</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-lg font-bold text-gray-800" id="travel-date"></div>
+                        <div class="text-sm text-gray-600" id="passenger-info"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filtre ve Sıralama -->
+        <div class="max-w-5xl mx-auto mb-6">
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div class="flex items-center gap-2 text-white">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <span class="font-semibold" id="trip-count">0 sefer bulundu</span>
+                    </div>
+                    <div class="flex gap-3">
+                        <select id="bus-type-filter" onchange="filterTrips()" class="px-4 py-2 rounded-lg bg-white text-gray-800 font-medium focus:outline-none focus:ring-2 focus:ring-blue-600">
+                            <option value="all">Tüm Otobüsler</option>
+                            <option value="VIP">Sadece VIP</option>
+                            <option value="Standart">Sadece Standart</option>
+                        </select>
+                        <select id="sort-filter" onchange="sortTrips()" class="px-4 py-2 rounded-lg bg-white text-gray-800 font-medium focus:outline-none focus:ring-2 focus:ring-blue-600">
+                            <option value="time">Saate Göre</option>
+                            <option value="price-low">Fiyat (Düşükten Yükseğe)</option>
+                            <option value="price-high">Fiyat (Yüksekten Düşüğe)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sefer Listesi -->
+        <div class="max-w-5xl mx-auto">
+            <div id="trips-container" class="space-y-4">
+                <!-- JavaScript ile doldurulacak -->
+            </div>
+        </div>
+
+        <!-- Sefer Bulunamadı -->
+        <div id="no-trips" class="max-w-5xl mx-auto text-center py-12 hidden">
+            <svg class="w-20 h-20 text-white/50 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <h3 class="text-2xl font-bold text-white mb-2">Sefer Bulunamadı</h3>
+            <p class="text-blue-100 mb-6">Seçtiğiniz kriterlere uygun sefer bulunmamaktadır.</p>
+            <button onclick="window.location.href='index.html'" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-blue-50 transition">
+                Yeni Arama Yap
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Rota mesafeleri ve süreleri (km ve saat)
+        const routeData = {
+            'Karaman-Ankara': { distance: '280 km', duration: '4 saat', price: 350 },
+            'Karaman-İstanbul': { distance: '650 km', duration: '8 saat', price: 500 },
+            'Karaman-İzmir': { distance: '750 km', duration: '10 saat', price: 550 },
+            'Karaman-Antalya': { distance: '350 km', duration: '5 saat', price: 400 },
+            'Karaman-Adana': { distance: '220 km', duration: '3 saat', price: 280 },
+            'Karaman-Konya': { distance: '100 km', duration: '1.5 saat', price: 150 },
+            'Karaman-Eskişehir': { distance: '450 km', duration: '6 saat', price: 400 },
+            'Karaman-Samsun': { distance: '700 km', duration: '9 saat', price: 520 },
+            'Karaman-Tokat': { distance: '600 km', duration: '8 saat', price: 480 },
+            
+            'Ankara-İstanbul': { distance: '450 km', duration: '5.5 saat', price: 400 },
+            'Ankara-İzmir': { distance: '590 km', duration: '7 saat', price: 450 },
+            'Ankara-Adana': { distance: '480 km', duration: '6 saat', price: 420 },
+            'Ankara-Konya': { distance: '260 km', duration: '3 saat', price: 300 },
+            'Ankara-Eskişehir': { distance: '230 km', duration: '2.5 saat', price: 250 },
+            'Ankara-Samsun': { distance: '420 km', duration: '5 saat', price: 380 },
+            'Ankara-Tokat': { distance: '440 km', duration: '5.5 saat', price: 390 },
+            
+            'İstanbul-İzmir': { distance: '470 km', duration: '6 saat', price: 450 },
+            'İstanbul-Ankara': { distance: '450 km', duration: '5.5 saat', price: 400 },
+            'İstanbul-Adana': { distance: '930 km', duration: '12 saat', price: 650 },
+            'İstanbul-Konya': { distance: '660 km', duration: '8 saat', price: 500 },
+            'İstanbul-Eskişehir': { distance: '310 km', duration: '4 saat', price: 320 },
+            'İstanbul-Samsun': { distance: '710 km', duration: '9 saat', price: 550 },
+            'İstanbul-Tokat': { distance: '730 km', duration: '9.5 saat', price: 570 },
+            
+            'İzmir-Ankara': { distance: '590 km', duration: '7 saat', price: 450 },
+            'İzmir-İstanbul': { distance: '470 km', duration: '6 saat', price: 450 },
+            'İzmir-Adana': { distance: '850 km', duration: '11 saat', price: 600 },
+            'İzmir-Konya': { distance: '570 km', duration: '7 saat', price: 450 },
+            'İzmir-Eskişehir': { distance: '350 km', duration: '4.5 saat', price: 350 },
+            
+            'Adana-Ankara': { distance: '480 km', duration: '6 saat', price: 420 },
+            'Adana-İstanbul': { distance: '930 km', duration: '12 saat', price: 650 },
+            'Adana-Konya': { distance: '350 km', duration: '4.5 saat', price: 350 },
+            
+            'Konya-Ankara': { distance: '260 km', duration: '3 saat', price: 300 },
+            'Konya-İstanbul': { distance: '660 km', duration: '8 saat', price: 500 },
+            'Konya-Eskişehir': { distance: '330 km', duration: '4 saat', price: 320 },
+            
+            'Eskişehir-Ankara': { distance: '230 km', duration: '2.5 saat', price: 250 },
+            'Eskişehir-İstanbul': { distance: '310 km', duration: '4 saat', price: 320 },
+            
+            'Samsun-Ankara': { distance: '420 km', duration: '5 saat', price: 380 },
+            'Samsun-İstanbul': { distance: '710 km', duration: '9 saat', price: 550 },
+            'Samsun-Tokat': { distance: '130 km', duration: '2 saat', price: 180 },
+            
+            'Tokat-Ankara': { distance: '440 km', duration: '5.5 saat', price: 390 },
+            'Tokat-İstanbul': { distance: '730 km', duration: '9.5 saat', price: 570 },
+            'Tokat-Samsun': { distance: '130 km', duration: '2 saat', price: 180 }
+        };
+
+        // Sefer saatleri şablonu
+        const tripTemplates = [
+            { time: '07:00', busType: 'VIP', features: '2+1 Koltuk, Wi-Fi, İkram, USB Şarj' },
+            { time: '09:30', busType: 'Standart', features: '2+2 Koltuk, İkram' },
+            { time: '11:00', busType: 'VIP', features: '2+1 Koltuk, Wi-Fi, İkram, USB Şarj' },
+            { time: '13:30', busType: 'Standart', features: '2+2 Koltuk, İkram' },
+            { time: '15:00', busType: 'VIP', features: '2+1 Koltuk, Wi-Fi, İkram, USB Şarj' },
+            { time: '17:30', busType: 'Standart', features: '2+2 Koltuk, İkram' },
+            { time: '19:00', busType: 'VIP', features: '2+1 Koltuk, Wi-Fi, İkram, USB Şarj' },
+            { time: '21:30', busType: 'Standart', features: '2+2 Koltuk, İkram' }
+        ];
+
+        let allTrips = [];
+        let filteredTrips = [];
+
+        // Sayfa yüklendiğinde
+        window.onload = function() {
+            const searchData = JSON.parse(localStorage.getItem('searchData'));
+            
+            if (!searchData) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Başlık bilgilerini doldur
+            document.getElementById('from-city').textContent = searchData.from;
+            document.getElementById('to-city').textContent = searchData.to;
+            document.getElementById('travel-date').textContent = searchData.date.formatted;
+            document.getElementById('passenger-info').textContent = searchData.passengerCount + ' Yolcu';
+
+            // Rota bilgisini al
+            const routeKey = `${searchData.from}-${searchData.to}`;
+            const reverseRouteKey = `${searchData.to}-${searchData.from}`;
+            const route = routeData[routeKey] || routeData[reverseRouteKey];
+
+            if (route) {
+                document.getElementById('route-distance').textContent = route.distance;
+                generateTrips(searchData, route);
+            } else {
+                document.getElementById('no-trips').classList.remove('hidden');
+            }
+        };
+
+        function generateTrips(searchData, route) {
+            allTrips = tripTemplates.map((template, index) => {
+                const priceVariation = template.busType === 'VIP' ? 1.2 : 1;
+                const randomVariation = 0.9 + Math.random() * 0.2;
+                const finalPrice = Math.round(route.price * priceVariation * randomVariation);
+                const availableSeats = Math.floor(Math.random() * 15) + 10;
+
+                return {
+                    id: index + 1,
+                    time: template.time,
+                    busType: template.busType,
+                    features: template.features,
+                    price: finalPrice,
+                    duration: route.duration,
+                    distance: route.distance,
+                    availableSeats: availableSeats,
+                    from: searchData.from,
+                    to: searchData.to,
+                    date: searchData.date
+                };
+            });
+
+            filteredTrips = [...allTrips];
+            displayTrips();
+        }
+
+        function displayTrips() {
+            const container = document.getElementById('trips-container');
+            container.innerHTML = '';
+
+            if (filteredTrips.length === 0) {
+                document.getElementById('no-trips').classList.remove('hidden');
+                document.getElementById('trip-count').textContent = '0 sefer bulundu';
+                return;
+            }
+
+            document.getElementById('no-trips').classList.add('hidden');
+            document.getElementById('trip-count').textContent = `${filteredTrips.length} sefer bulundu`;
+
+            filteredTrips.forEach(trip => {
+                const tripCard = document.createElement('div');
+                tripCard.className = 'bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all p-6 cursor-pointer transform hover:scale-[1.02]';
+                tripCard.onclick = () => selectTrip(trip);
+
+                tripCard.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                        <!-- Sol Taraf: Zaman ve Bilgiler -->
+                        <div class="flex items-center gap-6 flex-1">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-gray-800">${trip.time}</div>
+                                <div class="text-xs text-gray-600 mt-1">KALKIŞ</div>
+                            </div>
+                            
+                            <div class="flex flex-col items-center gap-1 px-4">
+                                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                </svg>
+                                <div class="text-xs text-gray-600 font-medium">${trip.duration}</div>
+                                <div class="text-xs text-gray-500">${trip.distance}</div>
+                            </div>
+                            
+                            <div class="flex-1 min-w-[200px]">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="px-3 py-1 rounded-full text-sm font-bold ${
+                                        trip.busType === 'VIP' 
+                                            ? 'bg-purple-100 text-purple-700' 
+                                            : 'bg-blue-100 text-blue-700'
+                                    }">
+                                        ${trip.busType}
+                                    </span>
+                                    <span class="text-green-600 text-sm font-semibold flex items-center gap-1">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                        ${trip.availableSeats} koltuk
+                                    </span>
+                                </div>
+                                <div class="text-sm text-gray-600 flex flex-wrap gap-2">
+                                    ${trip.features.split(',').map(f => `
+                                        <span class="flex items-center gap-1">
+                                            <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                            </svg>
+                                            ${f.trim()}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sağ Taraf: Fiyat ve Buton -->
+                        <div class="text-right">
+                            <div class="text-3xl font-bold text-red-600 mb-2">${trip.price} ₺</div>
+                            <button class="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-bold transition-all shadow-lg hover:shadow-xl">
+                                Koltuk Seç
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(tripCard);
+            });
+        }
+
+        function filterTrips() {
+            const busTypeFilter = document.getElementById('bus-type-filter').value;
+            
+            if (busTypeFilter === 'all') {
+                filteredTrips = [...allTrips];
+            } else {
+                filteredTrips = allTrips.filter(trip => trip.busType === busTypeFilter);
+            }
+            
+            sortTrips();
+        }
+
+        function sortTrips() {
+            const sortType = document.getElementById('sort-filter').value;
+            
+            switch(sortType) {
+                case 'time':
+                    filteredTrips.sort((a, b) => a.time.localeCompare(b.time));
+                    break;
+                case 'price-low':
+                    filteredTrips.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filteredTrips.sort((a, b) => b.price - a.price);
+                    break;
+            }
+            
+            displayTrips();
+        }
+
+        function selectTrip(trip) {
+            localStorage.setItem('selectedTrip', JSON.stringify(trip));
+            window.location.href = 'koltuk-secimi.html';
+        }
+    </script>
+</body>
+</html>

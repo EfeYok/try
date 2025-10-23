@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karaman Express - Otobüs Bileti</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-600 to-blue-400">
+    <!-- Header -->
+    <div class="bg-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <h1 class="text-2xl font-bold text-gray-800">Karaman Express</h1>
+                </div>
+                <div class="text-sm text-gray-600">
+                    📞 0850 123 45 67
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="container mx-auto px-4 py-12">
+        <div class="text-center mb-8">
+            <h2 class="text-4xl font-bold text-white mb-3">Güvenli ve Konforlu Yolculuk</h2>
+            <p class="text-blue-100 text-lg">Türkiye'nin dört bir yanına ekonomik ve hızlı ulaşım</p>
+        </div>
+
+        <!-- Bilet Arama Formu -->
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-8">
+                <!-- Tek Yön Başlık -->
+                <div class="flex items-center gap-2 mb-6 pb-4 border-b border-gray-200">
+                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800">Tek Yön</h3>
+                </div>
+
+                <!-- Form -->
+                <div class="space-y-6">
+                    <!-- Nereden - Nereye -->
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <!-- Nereden -->
+                        <div class="relative">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <svg class="w-4 h-4 inline mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                </svg>
+                                Nereden
+                            </label>
+                            <select id="from-city" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 text-gray-800 font-medium bg-white">
+                                <option value="">Kalkış şehri seçin</option>
+                                <option value="Adana">Adana</option>
+                                <option value="Ankara">Ankara</option>
+                                <option value="Eskişehir">Eskişehir</option>
+                                <option value="İstanbul">İstanbul</option>
+                                <option value="İzmir">İzmir</option>
+                                <option value="Karaman">Karaman</option>
+                                <option value="Konya">Konya</option>
+                                <option value="Samsun">Samsun</option>
+                                <option value="Tokat">Tokat</option>
+                            </select>
+                        </div>
+
+                        <!-- Nereye -->
+                        <div class="relative">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">
+                                <svg class="w-4 h-4 inline mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                </svg>
+                                Nereye
+                            </label>
+                            <select id="to-city" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 text-gray-800 font-medium bg-white">
+                                <option value="">Varış şehri seçin</option>
+                                <option value="Adana">Adana</option>
+                                <option value="Ankara">Ankara</option>
+                                <option value="Eskişehir">Eskişehir</option>
+                                <option value="İstanbul">İstanbul</option>
+                                <option value="İzmir">İzmir</option>
+                                <option value="Karaman">Karaman</option>
+                                <option value="Konya">Konya</option>
+                                <option value="Samsun">Samsun</option>
+                                <option value="Tokat">Tokat</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Yer Değiştir Butonu -->
+                    <div class="flex justify-center -my-3">
+                        <button onclick="swapCities()" class="bg-gray-100 hover:bg-blue-600 hover:text-white p-3 rounded-full shadow-md transition-all transform hover:scale-110">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Tarih Seçimi -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <svg class="w-4 h-4 inline mr-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                            Gidiş Tarihi
+                        </label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="date-selector">
+                            <!-- JavaScript ile doldurulacak -->
+                        </div>
+                    </div>
+
+                    <!-- Yolcu Sayısı -->
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <svg class="w-4 h-4 inline mr-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                            Yolcu Sayısı
+                        </label>
+                        <select id="passenger-count" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 text-gray-800 font-medium bg-white">
+                            <option value="1">1 Yolcu</option>
+                            <option value="2">2 Yolcu</option>
+                            <option value="3">3 Yolcu</option>
+                            <option value="4">4 Yolcu</option>
+                            <option value="5">5 Yolcu</option>
+                        </select>
+                    </div>
+
+                    <!-- Arama Butonu -->
+                    <button onclick="searchTrips()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 px-6 rounded-lg font-bold text-lg transition-all shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center gap-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                        Sefer Ara
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popüler Güzergahlar -->
+        <div class="max-w-6xl mx-auto mt-12">
+            <h3 class="text-2xl font-bold text-white mb-6 text-center">Popüler Güzergahlar</h3>
+            <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <button onclick="quickSearch('İstanbul', 'Ankara')" class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-4 rounded-lg transition-all border border-white/30">
+                    <div class="font-bold text-lg mb-1">İstanbul → Ankara</div>
+                    <div class="text-sm text-blue-100">150 ₺'den başlayan fiyatlarla</div>
+                </button>
+                <button onclick="quickSearch('Ankara', 'İzmir')" class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-4 rounded-lg transition-all border border-white/30">
+                    <div class="font-bold text-lg mb-1">Ankara → İzmir</div>
+                    <div class="text-sm text-blue-100">200 ₺'den başlayan fiyatlarla</div>
+                </button>
+                <button onclick="quickSearch('Karaman', 'İstanbul')" class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-4 rounded-lg transition-all border border-white/30">
+                    <div class="font-bold text-lg mb-1">Karaman → İstanbul</div>
+                    <div class="text-sm text-blue-100">180 ₺'den başlayan fiyatlarla</div>
+                </button>
+                <button onclick="quickSearch('Samsun', 'Ankara')" class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-4 rounded-lg transition-all border border-white/30">
+                    <div class="font-bold text-lg mb-1">Samsun → Ankara</div>
+                    <div class="text-sm text-blue-100">120 ₺'den başlayan fiyatlarla</div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="bg-blue-900/50 backdrop-blur-sm mt-12 py-8">
+        <div class="container mx-auto px-4 text-center text-white">
+            <p class="mb-2">© 2025 Karaman Express - Tüm hakları saklıdır.</p>
+            <p class="text-sm text-blue-200">Güvenli ve konforlu yolculuk için bizi tercih edin.</p>
+        </div>
+    </div>
+
+    <script>
+        let selectedDate = null;
+
+        // Tarihleri oluştur
+        function generateDates() {
+            const dateSelector = document.getElementById('date-selector');
+            const today = new Date();
+            const days = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+            const months = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+
+            for (let i = 0; i < 7; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                
+                const dateButton = document.createElement('button');
+                dateButton.type = 'button';
+                dateButton.className = 'p-3 rounded-lg border-2 border-gray-300 hover:border-blue-600 hover:bg-blue-50 transition-all text-center';
+                dateButton.onclick = () => selectDate(dateButton, date);
+                
+                const dayName = i === 0 ? 'Bugün' : i === 1 ? 'Yarın' : days[date.getDay()];
+                const formattedDate = `${date.getDate()} ${months[date.getMonth()]}`;
+                
+                dateButton.innerHTML = `
+                    <div class="text-sm font-semibold text-gray-700">${dayName}</div>
+                    <div class="text-xs text-gray-600">${formattedDate}</div>
+                `;
+                
+                dateButton.dataset.date = date.toISOString().split('T')[0];
+                dateButton.dataset.formatted = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}, ${dayName}`;
+                
+                dateSelector.appendChild(dateButton);
+            }
+        }
+
+        function selectDate(button, date) {
+            document.querySelectorAll('#date-selector button').forEach(btn => {
+                btn.className = 'p-3 rounded-lg border-2 border-gray-300 hover:border-blue-600 hover:bg-blue-50 transition-all text-center';
+            });
+            button.className = 'p-3 rounded-lg border-2 border-blue-600 bg-blue-600 text-white transition-all text-center';
+            selectedDate = {
+                date: button.dataset.date,
+                formatted: button.dataset.formatted
+            };
+        }
+
+        function swapCities() {
+            const fromCity = document.getElementById('from-city');
+            const toCity = document.getElementById('to-city');
+            const temp = fromCity.value;
+            fromCity.value = toCity.value;
+            toCity.value = temp;
+        }
+
+        function quickSearch(from, to) {
+            document.getElementById('from-city').value = from;
+            document.getElementById('to-city').value = to;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function searchTrips() {
+            const fromCity = document.getElementById('from-city').value;
+            const toCity = document.getElementById('to-city').value;
+            const passengerCount = document.getElementById('passenger-count').value;
+
+            if (!fromCity) {
+                alert('Lütfen kalkış şehrini seçiniz!');
+                return;
+            }
+
+            if (!toCity) {
+                alert('Lütfen varış şehrini seçiniz!');
+                return;
+            }
+
+            if (fromCity === toCity) {
+                alert('Kalkış ve varış şehirleri aynı olamaz!');
+                return;
+            }
+
+            if (!selectedDate) {
+                alert('Lütfen gidiş tarihini seçiniz!');
+                return;
+            }
+
+            // Rota bilgilerini kaydet
+            const routeData = {
+                from: fromCity,
+                to: toCity,
+                date: selectedDate,
+                passengerCount: passengerCount
+            };
+
+            localStorage.setItem('searchData', JSON.stringify(routeData));
+            window.location.href = 'sefer-listesi.html';
+        }
+
+        // Sayfa yüklendiğinde tarihleri oluştur
+        generateDates();
+    </script>
+</body>
+</html>
