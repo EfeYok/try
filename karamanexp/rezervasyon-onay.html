@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karaman Express - Biletiniz Hazır!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes checkmark {
+            0% { stroke-dashoffset: 100; }
+            100% { stroke-dashoffset: 0; }
+        }
+        .checkmark-circle {
+            animation: checkmark 0.6s ease-in-out;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 0;
+        }
+        @media print {
+            body { background: white !important; }
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-600 to-blue-400">
+    <!-- Header -->
+    <div class="bg-white shadow-lg no-print">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                    <h1 class="text-2xl font-bold text-gray-800">Karaman Express</h1>
+                </div>
+                <div class="text-sm text-gray-600">
+                    📞 0850 123 45 67
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Başarı Mesajı -->
+        <div class="max-w-4xl mx-auto mb-8 no-print">
+            <div class="bg-white rounded-2xl shadow-2xl p-8 text-center">
+                <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-12 h-12 text-white checkmark-circle" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">🎉 Rezervasyonunuz Tamamlandı!</h2>
+                <p class="text-gray-600 text-lg mb-4">
+                    Biletiniz hazır. E-posta ve SMS ile gönderildi.
+                </p>
+                <div class="inline-flex items-center gap-2 bg-blue-50 px-6 py-3 rounded-full">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span class="text-blue-800 font-semibold">PNR Kodu: <span id="pnr-code" class="font-mono text-xl"></span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bilet -->
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <!-- Bilet Üst Kısım (Mavi Gradyan) -->
+                <div class="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                            <div>
+                                <div class="text-2xl font-bold">Karaman Express</div>
+                                <div class="text-sm text-blue-100">Otobüs Bileti</div>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-sm text-blue-100">Bilet No</div>
+                            <div class="text-xl font-mono font-bold" id="ticket-number"></div>
+                        </div>
+                    </div>
+
+                    <!-- Güzergah (Büyük) -->
+                    <div class="flex items-center justify-between bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="text-center flex-1">
+                            <div class="text-sm text-blue-100 mb-1">KALKIŞ</div>
+                            <div class="text-3xl font-bold" id="ticket-from"></div>
+                            <div class="text-xl font-bold text-blue-200 mt-2" id="ticket-time"></div>
+                        </div>
+                        <div class="flex-1 flex flex-col items-center px-4">
+                            <svg class="w-16 h-16 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                            <div class="text-sm text-blue-200" id="ticket-duration"></div>
+                        </div>
+                        <div class="text-center flex-1">
+                            <div class="text-sm text-blue-100 mb-1">VARIŞ</div>
+                            <div class="text-3xl font-bold" id="ticket-to"></div>
+                            <div class="text-sm text-blue-200 mt-2" id="ticket-distance"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kesikli Çizgi -->
+                <div class="relative h-8 bg-gradient-to-r from-blue-600 to-blue-700">
+                    <div class="absolute inset-0 flex items-center justify-between px-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-400 via-blue-600 to-blue-900 rounded-full"></div>
+                        <div class="flex-1 border-t-4 border-dashed border-white/30 mx-2"></div>
+                        <div class="w-8 h-8 bg-gradient-to-br from-blue-400 via-blue-600 to-blue-900 rounded-full"></div>
+                    </div>
+                </div>
+
+                <!-- Bilet Alt Kısım (Detaylar) -->
+                <div class="p-6">
+                    <!-- Yolcu ve Tarih Bilgileri -->
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div class="space-y-4">
+                            <div>
+                                <div class="text-xs text-gray-500 mb-1">YOLCU ADI</div>
+                                <div class="text-lg font-bold text-gray-800" id="passenger-name"></div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-500 mb-1">TC KİMLİK NO</div>
+                                <div class="text-lg font-mono font-bold text-gray-800" id="passenger-tc"></div>
+                            </div>
+                            <div>
+                                <div class="text-xs text-gray-500 mb-1">CİNSİYET</div>
+                                <div class="text-lg font-bold text-gray-800" id="passenger-gender"></div>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="text-xs text-gray-500 mb-1">TARİH</div>
+                                <div class="text-lg font-bold text-gray-800" id="ticket-date"></div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <div class="text-xs text-gray-500 mb-1">KOLTUK NO</div>
+                                    <div class="text-3xl font-bold text-blue-600" id="seat-number"></div>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-500 mb-1">OTOBÜS TİPİ</div>
+                                    <div class="text-lg font-bold text-gray-800" id="bus-type"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- İletişim Bilgileri -->
+                    <div class="grid md:grid-cols-2 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
+                        <div>
+                            <div class="text-xs text-gray-500 mb-1">TELEFON</div>
+                            <div class="text-sm font-semibold text-gray-800" id="passenger-phone"></div>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-500 mb-1">E-POSTA</div>
+                            <div class="text-sm font-semibold text-gray-800 truncate" id="passenger-email"></div>
+                        </div>
+                    </div>
+
+                    <!-- Fiyat ve QR -->
+                    <div class="flex items-center justify-between pt-6 border-t-2 border-gray-200">
+                        <div>
+                            <div class="text-sm text-gray-500 mb-1">TOPLAM ÜCRET</div>
+                            <div class="text-4xl font-bold text-green-600" id="total-price"></div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-gray-200 rounded-lg flex items-center justify-center">
+                                <svg class="w-28 h-28 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M3 11h8V3H3v8zm2-6h4v4H5V5zm8-2v8h8V3h-8zm6 6h-4V5h4v4zM3 21h8v-8H3v8zm2-6h4v4H5v-4zm13-2h-2v2h2v-2zm-2 2h-2v2h2v-2zm2 2h-2v2h2v-2zm0 2h-2v2h2v-2zm2-6h2v2h-2v-2zm0 2h2v2h-2v-2zm0 2h2v2h-2v-2z"/>
+                                </svg>
+                            </div>
+                            <div class="text-xs text-gray-500 mt-2">QR Kod</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aksiyonlar -->
+            <div class="flex flex-wrap gap-4 justify-center mt-8 no-print">
+                <button onclick="window.print()" class="bg-white hover:bg-gray-100 text-gray-800 px-6 py-3 rounded-lg font-bold transition-all shadow-lg flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                    </svg>
+                    Yazdır / PDF Kaydet
+                </button>
+                <button onclick="downloadTicket()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold transition-all shadow-lg flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    Bileti İndir
+                </button>
+                <button onclick="newBooking()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-bold transition-all shadow-lg flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Yeni Bilet Al
+                </button>
+            </div>
+
+            <!-- Önemli Bilgiler -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mt-8 no-print">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Önemli Bilgiler
+                </h3>
+                <div class="grid md:grid-cols-2 gap-4 text-white">
+                    <div class="flex items-start gap-2">
+                        <svg class="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-sm">Lütfen seferden en az 30 dakika önce terminalde olunuz.</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <svg class="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-sm">Seyahat sırasında kimlik ibraz etmeniz gerekmektedir.</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <svg class="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-sm">İptal ve değişiklik işlemleri için seferden 2 saat önce iletişime geçiniz.</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <svg class="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-sm">Bagaj hakları: 30 kg (Standart), 40 kg (VIP)</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <svg class="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-sm">Biletiniz e-posta ve SMS ile gönderilmiştir.</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <svg class="w-5 h-5 text-blue-300 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-sm">Müşteri Hizmetleri: 0850 123 45 67</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="bg-blue-900/50 backdrop-blur-sm mt-12 py-6 no-print">
+        <div class="container mx-auto px-4 text-center text-white">
+            <p class="mb-1">© 2025 Karaman Express - Tüm hakları saklıdır.</p>
+            <p class="text-sm text-blue-200">İyi yolculuklar dileriz! 🚌</p>
+        </div>
+    </div>
+
+    <script>
+        const tripData = JSON.parse(localStorage.getItem('selectedTrip'));
+        const seatData = JSON.parse(localStorage.getItem('selectedSeatData'));
+        const passengerInfo = JSON.parse(localStorage.getItem('passengerInfo'));
+
+        if (!tripData || !seatData || !passengerInfo) {
+            window.location.href = 'index.html';
+        }
+
+        // PNR ve Bilet Numarası Oluştur
+        const pnrCode = 'KE' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+        const ticketNumber = 'BLT' + Date.now().toString().slice(-8);
+
+        document.getElementById('pnr-code').textContent = pnrCode;
+        document.getElementById('ticket-number').textContent = ticketNumber;
+
+        // Bilet Bilgileri
+        document.getElementById('ticket-from').textContent = tripData.from;
+        document.getElementById('ticket-to').textContent = tripData.to;
+        document.getElementById('ticket-time').textContent = tripData.time;
+        document.getElementById('ticket-duration').textContent = tripData.duration;
+        document.getElementById('ticket-distance').textContent = tripData.distance;
+        document.getElementById('ticket-date').textContent = tripData.date.formatted;
+        
+        // Yolcu Bilgileri
+        document.getElementById('passenger-name').textContent = passengerInfo.fullname.toUpperCase();
+        document.getElementById('passenger-tc').textContent = passengerInfo.tcno;
+        document.getElementById('passenger-gender').textContent = passengerInfo.gender;
+        document.getElementById('passenger-phone').textContent = passengerInfo.phone;
+        document.getElementById('passenger-email').textContent = passengerInfo.email;
+        
+        // Koltuk ve Otobüs
+        document.getElementById('seat-number').textContent = seatData.seatNumber;
+        document.getElementById('bus-type').textContent = tripData.busType;
+        
+        // Fiyat
+        document.getElementById('total-price').textContent = tripData.price + ' ₺';
+
+        function downloadTicket() {
+            alert('📥 Bilet indirme özelliği yakında eklenecektir.\n\nŞu an için "Yazdır" butonunu kullanarak PDF olarak kaydedebilirsiniz.\n\nYazdır → Hedef: "PDF olarak kaydet"');
+        }
+
+        function newBooking() {
+            // Tüm verileri temizle
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+        // Otomatik e-posta simülasyonu
+        console.log('📧 E-posta Gönderildi:');
+        console.log('Kime:', passengerInfo.email);
+        console.log('Konu: Karaman Express - Biletiniz Hazır! (PNR:', pnrCode + ')');
+        console.log('---');
+        console.log('📱 SMS Gönderildi:');
+        console.log('Numara:', passengerInfo.phone);
+        console.log('Mesaj: Sayın', passengerInfo.fullname + ', biletiniz hazır! PNR:', pnrCode);
+    </script>
+</body>
+</html>
