@@ -18,7 +18,6 @@
                     <h1 class="text-2xl font-bold text-gray-800">Karaman Express</h1>
                 </button>
                 <div class="text-sm text-gray-600">
-                    📞 0850 123 45 67
                 </div>
             </div>
         </div>
@@ -112,58 +111,67 @@
     </div>
 
     <script>
-        // Rota mesafeleri ve süreleri (km ve saat)
+        // Rota mesafeleri, süreleri ve durakları
         const routeData = {
-            'Karaman-Ankara': { distance: '280 km', duration: '4 saat', price: 350 },
-            'Karaman-İstanbul': { distance: '650 km', duration: '8 saat', price: 500 },
-            'Karaman-İzmir': { distance: '750 km', duration: '10 saat', price: 550 },
-            'Karaman-Antalya': { distance: '350 km', duration: '5 saat', price: 400 },
-            'Karaman-Adana': { distance: '220 km', duration: '3 saat', price: 280 },
-            'Karaman-Konya': { distance: '100 km', duration: '1.5 saat', price: 150 },
-            'Karaman-Eskişehir': { distance: '450 km', duration: '6 saat', price: 400 },
-            'Karaman-Samsun': { distance: '700 km', duration: '9 saat', price: 520 },
-            'Karaman-Tokat': { distance: '600 km', duration: '8 saat', price: 480 },
+            'Karaman-Ankara': { distance: '280 km', duration: '4 saat', price: 350, stops: ['Konya'] },
+            'Karaman-İstanbul': { distance: '650 km', duration: '8 saat', price: 500, stops: ['Konya', 'Eskişehir', 'Bolu'] },
+            'Karaman-İzmir': { distance: '750 km', duration: '10 saat', price: 550, stops: ['Konya', 'Afyon', 'Manisa'] },
+            'Karaman-Adana': { distance: '220 km', duration: '3 saat', price: 280, stops: [] },
+            'Karaman-Konya': { distance: '100 km', duration: '1.5 saat', price: 150, stops: [] },
+            'Karaman-Eskişehir': { distance: '450 km', duration: '6 saat', price: 400, stops: ['Konya', 'Ankara'] },
+            'Karaman-Samsun': { distance: '700 km', duration: '9 saat', price: 520, stops: ['Ankara', 'Çorum'] },
+            'Karaman-Tokat': { distance: '600 km', duration: '8 saat', price: 480, stops: ['Ankara', 'Çorum'] },
             
-            'Ankara-İstanbul': { distance: '450 km', duration: '5.5 saat', price: 400 },
-            'Ankara-İzmir': { distance: '590 km', duration: '7 saat', price: 450 },
-            'Ankara-Adana': { distance: '480 km', duration: '6 saat', price: 420 },
-            'Ankara-Konya': { distance: '260 km', duration: '3 saat', price: 300 },
-            'Ankara-Eskişehir': { distance: '230 km', duration: '2.5 saat', price: 250 },
-            'Ankara-Samsun': { distance: '420 km', duration: '5 saat', price: 380 },
-            'Ankara-Tokat': { distance: '440 km', duration: '5.5 saat', price: 390 },
+            'Ankara-İstanbul': { distance: '450 km', duration: '5.5 saat', price: 400, stops: ['Bolu'] },
+            'Ankara-İzmir': { distance: '590 km', duration: '7 saat', price: 450, stops: ['Eskişehir', 'Afyon'] },
+            'Ankara-Adana': { distance: '480 km', duration: '6 saat', price: 420, stops: ['Kırıkkale', 'Kayseri'] },
+            'Ankara-Konya': { distance: '260 km', duration: '3 saat', price: 300, stops: [] },
+            'Ankara-Eskişehir': { distance: '230 km', duration: '2.5 saat', price: 250, stops: [] },
+            'Ankara-Samsun': { distance: '420 km', duration: '5 saat', price: 380, stops: ['Çorum'] },
+            'Ankara-Tokat': { distance: '440 km', duration: '5.5 saat', price: 390, stops: ['Çorum'] },
+            'Ankara-Karaman': { distance: '280 km', duration: '4 saat', price: 350, stops: ['Konya'] },
             
-            'İstanbul-İzmir': { distance: '470 km', duration: '6 saat', price: 450 },
-            'İstanbul-Ankara': { distance: '450 km', duration: '5.5 saat', price: 400 },
-            'İstanbul-Adana': { distance: '930 km', duration: '12 saat', price: 650 },
-            'İstanbul-Konya': { distance: '660 km', duration: '8 saat', price: 500 },
-            'İstanbul-Eskişehir': { distance: '310 km', duration: '4 saat', price: 320 },
-            'İstanbul-Samsun': { distance: '710 km', duration: '9 saat', price: 550 },
-            'İstanbul-Tokat': { distance: '730 km', duration: '9.5 saat', price: 570 },
+            'İstanbul-İzmir': { distance: '470 km', duration: '6 saat', price: 450, stops: ['Bursa', 'Balıkesir'] },
+            'İstanbul-Ankara': { distance: '450 km', duration: '5.5 saat', price: 400, stops: ['Bolu'] },
+            'İstanbul-Adana': { distance: '930 km', duration: '12 saat', price: 650, stops: ['Ankara', 'Aksaray', 'Niğde'] },
+            'İstanbul-Konya': { distance: '660 km', duration: '8 saat', price: 500, stops: ['Eskişehir', 'Ankara'] },
+            'İstanbul-Eskişehir': { distance: '310 km', duration: '4 saat', price: 320, stops: [] },
+            'İstanbul-Samsun': { distance: '710 km', duration: '9 saat', price: 550, stops: ['Bolu', 'Çorum'] },
+            'İstanbul-Tokat': { distance: '730 km', duration: '9.5 saat', price: 570, stops: ['Bolu', 'Çorum'] },
+            'İstanbul-Karaman': { distance: '650 km', duration: '8 saat', price: 500, stops: ['Bolu', 'Eskişehir', 'Konya'] },
             
-            'İzmir-Ankara': { distance: '590 km', duration: '7 saat', price: 450 },
-            'İzmir-İstanbul': { distance: '470 km', duration: '6 saat', price: 450 },
-            'İzmir-Adana': { distance: '850 km', duration: '11 saat', price: 600 },
-            'İzmir-Konya': { distance: '570 km', duration: '7 saat', price: 450 },
-            'İzmir-Eskişehir': { distance: '350 km', duration: '4.5 saat', price: 350 },
+            'İzmir-Ankara': { distance: '590 km', duration: '7 saat', price: 450, stops: ['Afyon', 'Eskişehir'] },
+            'İzmir-İstanbul': { distance: '470 km', duration: '6 saat', price: 450, stops: ['Balıkesir', 'Bursa'] },
+            'İzmir-Adana': { distance: '850 km', duration: '11 saat', price: 600, stops: ['Afyon', 'Konya'] },
+            'İzmir-Konya': { distance: '570 km', duration: '7 saat', price: 450, stops: ['Afyon'] },
+            'İzmir-Eskişehir': { distance: '350 km', duration: '4.5 saat', price: 350, stops: [] },
+            'İzmir-Karaman': { distance: '750 km', duration: '10 saat', price: 550, stops: ['Manisa', 'Afyon', 'Konya'] },
             
-            'Adana-Ankara': { distance: '480 km', duration: '6 saat', price: 420 },
-            'Adana-İstanbul': { distance: '930 km', duration: '12 saat', price: 650 },
-            'Adana-Konya': { distance: '350 km', duration: '4.5 saat', price: 350 },
+            'Adana-Ankara': { distance: '480 km', duration: '6 saat', price: 420, stops: ['Kayseri', 'Kırıkkale'] },
+            'Adana-İstanbul': { distance: '930 km', duration: '12 saat', price: 650, stops: ['Niğde', 'Aksaray', 'Ankara'] },
+            'Adana-Konya': { distance: '350 km', duration: '4.5 saat', price: 350, stops: [] },
+            'Adana-Karaman': { distance: '220 km', duration: '3 saat', price: 280, stops: [] },
             
-            'Konya-Ankara': { distance: '260 km', duration: '3 saat', price: 300 },
-            'Konya-İstanbul': { distance: '660 km', duration: '8 saat', price: 500 },
-            'Konya-Eskişehir': { distance: '330 km', duration: '4 saat', price: 320 },
+            'Konya-Ankara': { distance: '260 km', duration: '3 saat', price: 300, stops: [] },
+            'Konya-İstanbul': { distance: '660 km', duration: '8 saat', price: 500, stops: ['Ankara', 'Eskişehir'] },
+            'Konya-Eskişehir': { distance: '330 km', duration: '4 saat', price: 320, stops: [] },
+            'Konya-Karaman': { distance: '100 km', duration: '1.5 saat', price: 150, stops: [] },
+            'Konya-Adana': { distance: '350 km', duration: '4.5 saat', price: 350, stops: [] },
             
-            'Eskişehir-Ankara': { distance: '230 km', duration: '2.5 saat', price: 250 },
-            'Eskişehir-İstanbul': { distance: '310 km', duration: '4 saat', price: 320 },
+            'Eskişehir-Ankara': { distance: '230 km', duration: '2.5 saat', price: 250, stops: [] },
+            'Eskişehir-İstanbul': { distance: '310 km', duration: '4 saat', price: 320, stops: [] },
+            'Eskişehir-Konya': { distance: '330 km', duration: '4 saat', price: 320, stops: [] },
+            'Eskişehir-Karaman': { distance: '450 km', duration: '6 saat', price: 400, stops: ['Ankara', 'Konya'] },
             
-            'Samsun-Ankara': { distance: '420 km', duration: '5 saat', price: 380 },
-            'Samsun-İstanbul': { distance: '710 km', duration: '9 saat', price: 550 },
-            'Samsun-Tokat': { distance: '130 km', duration: '2 saat', price: 180 },
+            'Samsun-Ankara': { distance: '420 km', duration: '5 saat', price: 380, stops: ['Çorum'] },
+            'Samsun-İstanbul': { distance: '710 km', duration: '9 saat', price: 550, stops: ['Çorum', 'Bolu'] },
+            'Samsun-Tokat': { distance: '130 km', duration: '2 saat', price: 180, stops: [] },
+            'Samsun-Karaman': { distance: '700 km', duration: '9 saat', price: 520, stops: ['Çorum', 'Ankara'] },
             
-            'Tokat-Ankara': { distance: '440 km', duration: '5.5 saat', price: 390 },
-            'Tokat-İstanbul': { distance: '730 km', duration: '9.5 saat', price: 570 },
-            'Tokat-Samsun': { distance: '130 km', duration: '2 saat', price: 180 }
+            'Tokat-Ankara': { distance: '440 km', duration: '5.5 saat', price: 390, stops: ['Çorum'] },
+            'Tokat-İstanbul': { distance: '730 km', duration: '9.5 saat', price: 570, stops: ['Çorum', 'Bolu'] },
+            'Tokat-Samsun': { distance: '130 km', duration: '2 saat', price: 180, stops: [] },
+            'Tokat-Karaman': { distance: '600 km', duration: '8 saat', price: 480, stops: ['Çorum', 'Ankara'] }
         };
 
         // Sefer saatleri şablonu
@@ -227,7 +235,8 @@
                     availableSeats: availableSeats,
                     from: searchData.from,
                     to: searchData.to,
-                    date: searchData.date
+                    date: searchData.date,
+                    stops: route.stops || []
                 };
             });
 
@@ -252,6 +261,20 @@
                 const tripCard = document.createElement('div');
                 tripCard.className = 'bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all p-6 cursor-pointer transform hover:scale-[1.02]';
                 tripCard.onclick = () => selectTrip(trip);
+
+                // Durak bilgisi varsa göster
+                const stopsHtml = trip.stops && trip.stops.length > 0 ? `
+                    <div class="mt-3 pt-3 border-t border-gray-200">
+                        <div class="flex items-center gap-2 text-sm">
+                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span class="text-gray-600 font-medium">Ara Duraklar:</span>
+                            <span class="text-gray-700">${trip.stops.join(' • ')}</span>
+                        </div>
+                    </div>
+                ` : '';
 
                 tripCard.innerHTML = `
                     <div class="flex flex-wrap items-center justify-between gap-4">
@@ -296,6 +319,7 @@
                                         </span>
                                     `).join('')}
                                 </div>
+                                ${stopsHtml}
                             </div>
                         </div>
                         
