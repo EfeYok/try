@@ -87,7 +87,7 @@ div#myass {
     margin: auto;
 }
 
-div#two {
+.two {
     display: grid;
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);

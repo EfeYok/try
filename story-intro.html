@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story</title>
+    <link rel="icon" type="image/png" href="...">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #c5eaff 0%, #ffb685 100%);
+        }
+
+        a {
+            text-shadow: 2px 2px 7px #111111;
+        }
+
+        .bar {
+            background-color: rgb(141, 141, 141);
+            width: 200px;
+            border-radius: 15px;
+        }
+
+        .ins {
+            background-color: rgb(45, 184, 219);
+            color: white;
+            padding: 1%;
+            text-align: right;
+            font-size: 18px;
+            border-radius: 15px;
+            width: 10%;
+        }
+
+        p,
+        h3 {
+            color: rgb(36, 36, 36);
+        }
+
+        .pp {
+            width: 70%;
+            display: center;
+            text-align: center;
+            margin: auto;
+        }
+
+        .bar {
+            background-color: rgb(141, 141, 141);
+            width: 200px;
+            border-radius: 15px;
+            margin-top: 17px;
+        }
+
+        .ins {
+            background-color: rgb(45, 184, 219);
+            color: white;
+            padding: 1%;
+            text-align: right;
+            font-size: 18px;
+            border-radius: 15px;
+            width: 10%;
+        }
+
+        button#st {
+            background-color: bisque;
+            width: 35%;
+            font-size: 20px;
+            margin: auto;
+            margin-top: 12px;
+            margin-bottom: 30px;
+        }
+
+        .pst {
+            text-align: left;
+            width: 100%;
+            margin: auto;
+            margin-bottom: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="navbar">
+            <div class="navbar-brand">📜 Story</div>
+            <div class="navbar-user" id="navbarUser"></div>
+        </div>
+
+        <div class="content-box">
+            <h2 id="welcomeMessage"></h2>
+            <p style="text-align: center; color: white; text-shadow: 1px 1px 5px #111111; margin-bottom: 30px;">
+                Sistemimize başarıyla giriş yaptın.
+            </p>
+
+            <div class="button-group" id="menuButtons"></div>
+        </div>
+        <div class="two">
+            <h3 id="dort">Process:</h3>
+            <br />
+            <hr />
+            <br />
+            <p class="pp">
+                <img src="BocchiSticker.png" alt="emoji"
+                    style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
+                Loading...
+            </p>
+            <div class="bar">
+                <div class="ins">5%</div>
+            </div>
+        </div>
+        <div class="two">
+            <h3 id="dort">Writing root of the story:</h3>
+            <br />
+            <hr />
+            <br />
+            <p class="pst">
+                At the start of the game, you are having some home routines.<br/>
+                Someone or something is put you sleep. When you wake up, you see you are in a train.<br/>
+                Train that goin’ a dark ways like “trees with no leafs, bats flying around, the dark clouds in air”.<br/>
+                All those you see. And your door knocks. (you are in a train cabin.)<br/>
+                You open the door and you see train staff. He is having a “welcome talk” to you.<br/>
+                You listen him with a full focus but you see some noise at the back side of the staff.<br/>
+                Staff is sayin’ something like “This train’s last station is a beautiful place.”, “You need to be<br/>
+                patient.”, “Do not listen other passangers, they don’t have an any idea about what they are talking.”<br/>
+                When the staff came end of the talk, he leaves your room. And you are start to think about all of this.<br/>
+                Like; “How did I get here?”, “Why I’m here?”, “Who is that guy?”, “What is that sounds?”…<br/>
+                After all, you start to check your room for find something useable.<br/>
+                *(you find some items but I didn’t think about it. Those will be aboutmission stuffs that you will see<br/>
+                in future.)*<br/>
+                When you finish to check something, you leave the room and taking a look to other cabins.<br/>
+                You can just see a few spot about other rooms. And that image is not clear. *(there will be an easter<br/>
+                eggs about other games or films… idk)*
+            </p>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        window.onload = function () {
+            initUserData();
+
+            // Giriş kontrolü
+            const currentUser = getCurrentUser();
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Kullanıcı bilgilerini göster
+            const isAdmin = checkIsAdmin(currentUser);
+            document.getElementById('welcomeMessage').textContent = `Hoş Geldin, ${currentUser}! 👋`;
+
+            const navbarUser = document.getElementById('navbarUser');
+            navbarUser.innerHTML = `
+                ${currentUser}
+                ${isAdmin ? '<span class="admin-badge">👑 Admin</span>' : ''}
+            `;
+
+            // Menü butonları
+            const menuButtons = document.getElementById('menuButtons');
+            let buttonsHTML = `
+                <button class="btn-info" onclick="window.location.href='profile.html'">👤 Profilim</button>
+            `;
+
+            if (isAdmin) {
+                buttonsHTML += `<button class="btn-warning" onclick="window.location.href='admin-panel.html'">⚙️ Admin Panel</button>`;
+            }
+
+            buttonsHTML += `<button class="btn-danger" onclick="cikisYap()">🚪 Çıkış Yap</button>`;
+
+            menuButtons.innerHTML = buttonsHTML;
+        };
+
+        function cikisYap() {
+            logout();
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>
