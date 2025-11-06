@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,24 +10,29 @@
         .calendar-day {
             transition: all 0.2s;
         }
+
         .calendar-day:hover:not(.disabled):not(.selected) {
             transform: scale(1.05);
             background-color: #eff6ff;
         }
+
         .calendar-day.selected {
             background-color: #2563eb;
             color: white;
             font-weight: bold;
         }
+
         .calendar-day.disabled {
             opacity: 0.3;
             cursor: not-allowed;
         }
+
         .calendar-day.today {
             border: 2px solid #2563eb;
         }
     </style>
 </head>
+
 <body class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-600 to-blue-400">
     <!-- Header -->
     <div class="bg-white shadow-lg">
@@ -34,12 +40,13 @@
             <div class="flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     <h1 class="text-2xl font-bold text-gray-800">Karaman Express</h1>
                 </div>
                 <div class="text-sm text-gray-600">
-                    📞 0555 555 55 55
+                    📞 0850 123 45 67
                 </div>
             </div>
         </div>
@@ -59,7 +66,8 @@
                 <div class="flex items-center gap-2 mb-6 pb-4 border-b border-gray-200">
                     <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
                         <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
                         </svg>
                     </div>
                     <h3 class="text-xl font-bold text-gray-800">Tek Yön</h3>
@@ -73,11 +81,14 @@
                         <div class="relative">
                             <label class="block text-sm font-semibold text-gray-700 mb-2">
                                 <svg class="w-4 h-4 inline mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                    <path fill-rule="evenodd"
+                                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                        clip-rule="evenodd" />
                                 </svg>
                                 Nereden
                             </label>
-                            <select id="from-city" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 text-gray-800 font-medium bg-white">
+                            <select id="from-city"
+                                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 text-gray-800 font-medium bg-white">
                                 <option value="">Kalkış şehri seçin</option>
                                 <option value="Adana">Adana</option>
                                 <option value="Ankara">Ankara</option>
@@ -94,12 +105,15 @@
                         <!-- Nereye -->
                         <div class="relative">
                             <label class="block text-sm font-semibold text-gray-700 mb-2">
-                                <svg class="w-4 h-4 inline mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                                <svg class="w-4 h-4 inline mr-1 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
+                                        clip-rule="evenodd" />
                                 </svg>
                                 Nereye
                             </label>
-                            <select id="to-city" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 text-gray-800 font-medium bg-white">
+                            <select id="to-city"
+                                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 text-gray-800 font-medium bg-white">
                                 <option value="">Varış şehri seçin</option>
                                 <option value="Adana">Adana</option>
                                 <option value="Ankara">Ankara</option>
@@ -116,9 +130,11 @@
 
                     <!-- Yer Değiştir Butonu -->
                     <div class="flex justify-center -my-3">
-                        <button onclick="swapCities()" class="bg-gray-100 hover:bg-blue-600 hover:text-white p-3 rounded-full shadow-md transition-all transform hover:scale-110">
+                        <button onclick="swapCities()"
+                            class="bg-gray-100 hover:bg-blue-600 hover:text-white p-3 rounded-full shadow-md transition-all transform hover:scale-110">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
                             </svg>
                         </button>
                     </div>
@@ -127,31 +143,38 @@
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-3 flex items-center justify-between">
                             <span>
-                                <svg class="w-4 h-4 inline mr-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                <svg class="w-4 h-4 inline mr-1 text-blue-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                 </svg>
                                 Gidiş Tarihi
                             </span>
                             <span class="text-xs text-gray-500 font-normal" id="selected-date-text"></span>
                         </label>
-                        
+
                         <!-- Takvim Başlık -->
-                        <div class="bg-gray-50 rounded-t-lg p-3 flex items-center justify-between border-2 border-b-0 border-gray-300">
+                        <div
+                            class="bg-gray-50 rounded-t-lg p-3 flex items-center justify-between border-2 border-b-0 border-gray-300">
                             <button onclick="previousMonth()" class="p-2 hover:bg-gray-200 rounded-lg transition">
-                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
                                 </svg>
                             </button>
                             <div class="text-center">
                                 <div class="font-bold text-gray-800" id="calendar-month-year"></div>
                             </div>
                             <button onclick="nextMonth()" class="p-2 hover:bg-gray-200 rounded-lg transition">
-                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
                                 </svg>
                             </button>
                         </div>
-                        
+
                         <!-- Takvim Grid -->
                         <div class="border-2 border-gray-300 rounded-b-lg p-4 bg-white">
                             <!-- Günler -->
@@ -161,8 +184,8 @@
                                 <div class="text-center text-xs font-semibold text-gray-600 py-2">Çar</div>
                                 <div class="text-center text-xs font-semibold text-gray-600 py-2">Per</div>
                                 <div class="text-center text-xs font-semibold text-gray-600 py-2">Cum</div>
-                                <div class="text-center text-xs font-semibold text-blue-600 py-2">Cmt</div>
-                                <div class="text-center text-xs font-semibold text-blue-600 py-2">Paz</div>
+                                <div class="text-center text-xs font-semibold text-red-600 py-2">Cmt</div>
+                                <div class="text-center text-xs font-semibold text-red-600 py-2">Paz</div>
                             </div>
                             <!-- Tarihler -->
                             <div id="calendar-days" class="grid grid-cols-7 gap-2"></div>
@@ -172,12 +195,15 @@
                     <!-- Yolcu Sayısı -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">
-                            <svg class="w-4 h-4 inline mr-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            <svg class="w-4 h-4 inline mr-1 text-blue-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
                             Yolcu Sayısı
                         </label>
-                        <select id="passenger-count" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 text-gray-800 font-medium bg-white">
+                        <select id="passenger-count"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 text-gray-800 font-medium bg-white">
                             <option value="1">1 Yolcu</option>
                             <option value="2">2 Yolcu</option>
                             <option value="3">3 Yolcu</option>
@@ -187,9 +213,11 @@
                     </div>
 
                     <!-- Arama Butonu -->
-                    <button onclick="searchTrips()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 px-6 rounded-lg font-bold text-lg transition-all shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center gap-2">
+                    <button onclick="searchTrips()"
+                        class="w-full bg-red-600 hover:bg-red-700 text-white py-4 px-6 rounded-lg font-bold text-lg transition-all shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center gap-2">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                         Sefer Ara
                     </button>
@@ -201,19 +229,23 @@
         <div class="max-w-6xl mx-auto mt-12">
             <h3 class="text-2xl font-bold text-white mb-6 text-center">Popüler Güzergahlar</h3>
             <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-4">
-                <button onclick="quickSearch('İstanbul', 'Ankara')" class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-4 rounded-lg transition-all border border-white/30">
+                <button onclick="quickSearch('İstanbul', 'Ankara')"
+                    class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-4 rounded-lg transition-all border border-white/30">
                     <div class="font-bold text-lg mb-1">İstanbul → Ankara</div>
                     <div class="text-sm text-blue-100">400 ₺'den başlayan fiyatlarla</div>
                 </button>
-                <button onclick="quickSearch('Ankara', 'İzmir')" class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-4 rounded-lg transition-all border border-white/30">
+                <button onclick="quickSearch('Ankara', 'İzmir')"
+                    class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-4 rounded-lg transition-all border border-white/30">
                     <div class="font-bold text-lg mb-1">Ankara → İzmir</div>
                     <div class="text-sm text-blue-100">450 ₺'den başlayan fiyatlarla</div>
                 </button>
-                <button onclick="quickSearch('Karaman', 'İstanbul')" class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-4 rounded-lg transition-all border border-white/30">
+                <button onclick="quickSearch('Karaman', 'İstanbul')"
+                    class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-4 rounded-lg transition-all border border-white/30">
                     <div class="font-bold text-lg mb-1">Karaman → İstanbul</div>
                     <div class="text-sm text-blue-100">500 ₺'den başlayan fiyatlarla</div>
                 </button>
-                <button onclick="quickSearch('Samsun', 'Ankara')" class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-4 rounded-lg transition-all border border-white/30">
+                <button onclick="quickSearch('Samsun', 'Ankara')"
+                    class="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white p-4 rounded-lg transition-all border border-white/30">
                     <div class="font-bold text-lg mb-1">Samsun → Ankara</div>
                     <div class="text-sm text-blue-100">380 ₺'den başlayan fiyatlarla</div>
                 </button>
@@ -229,68 +261,99 @@
         </div>
     </div>
 
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Firebase yapılandırması - BU KISMI KENDİ FIREBASE CONFIG İLE DEĞİŞTİRİN
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyD7hCepYSGIR9WPbTQQ9UhivBQr9IxQFfc",
+            authDomain: "karaman-express.firebaseapp.com",
+            projectId: "karaman-express",
+            storageBucket: "karaman-express.firebasestorage.app",
+            messagingSenderId: "675458442911",
+            appId: "1:675458442911:web:ca7d007b71649d0da864aa"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Global erişim için
+        window.db = db;
+    </script>
+
     <script>
         let currentDate = new Date();
         let selectedDate = null;
         const months = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
         const monthsShort = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
 
+        // Maksimum rezervasyon tarihi (bugünden 1 ay sonra)
+        const maxDate = new Date();
+        maxDate.setMonth(maxDate.getMonth() + 1);
+        maxDate.setHours(23, 59, 59, 999);
+
         function renderCalendar() {
             const year = currentDate.getFullYear();
             const month = currentDate.getMonth();
-            
+
             document.getElementById('calendar-month-year').textContent = `${months[month]} ${year}`;
-            
+
             const firstDay = new Date(year, month, 1);
             const lastDay = new Date(year, month + 1, 0);
             const daysInMonth = lastDay.getDate();
-            
+
             // Pazartesi = 0, Pazar = 6 olacak şekilde ayarla
             let startingDayOfWeek = firstDay.getDay() - 1;
             if (startingDayOfWeek === -1) startingDayOfWeek = 6;
-            
+
             const calendarDays = document.getElementById('calendar-days');
             calendarDays.innerHTML = '';
-            
+
             const today = new Date();
             today.setHours(0, 0, 0, 0);
-            
+
             // Boş günler
             for (let i = 0; i < startingDayOfWeek; i++) {
                 const emptyDiv = document.createElement('div');
                 calendarDays.appendChild(emptyDiv);
             }
-            
+
             // Günleri ekle
             for (let day = 1; day <= daysInMonth; day++) {
                 const date = new Date(year, month, day);
                 date.setHours(0, 0, 0, 0);
-                
+
                 const dayButton = document.createElement('button');
                 dayButton.type = 'button';
                 dayButton.className = 'calendar-day p-3 rounded-lg text-center cursor-pointer';
                 dayButton.textContent = day;
-                
-                // Geçmiş tarihleri devre dışı bırak
-                if (date < today) {
+
+                // Geçmiş tarihleri veya 1 ay sonrasını devre dışı bırak
+                if (date < today || date > maxDate) {
                     dayButton.className += ' disabled bg-gray-100 text-gray-400';
                     dayButton.disabled = true;
+                    if (date > maxDate) {
+                        dayButton.title = 'Rezervasyon sadece 1 ay öncesinden yapılabilir';
+                    }
                 } else {
                     dayButton.className += ' bg-white hover:bg-blue-50 text-gray-800';
                 }
-                
+
                 // Bugün
                 if (date.getTime() === today.getTime()) {
                     dayButton.className += ' today';
                 }
-                
+
                 // Seçili tarih
                 if (selectedDate && date.getTime() === selectedDate.getTime()) {
                     dayButton.className = dayButton.className.replace('bg-white', '').replace('hover:bg-blue-50', '') + ' selected';
                 }
-                
+
                 dayButton.onclick = () => selectDate(date, day, month, year);
-                
+
                 calendarDays.appendChild(dayButton);
             }
         }
@@ -303,11 +366,32 @@
         }
 
         function previousMonth() {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            // Bugünün ayından önceki aya gidemez
+            const previousMonth = new Date(currentDate);
+            previousMonth.setMonth(previousMonth.getMonth() - 1);
+
+            if (previousMonth.getFullYear() < today.getFullYear() ||
+                (previousMonth.getFullYear() === today.getFullYear() && previousMonth.getMonth() < today.getMonth())) {
+                return; // Geçmiş aya gitme
+            }
+
             currentDate.setMonth(currentDate.getMonth() - 1);
             renderCalendar();
         }
 
         function nextMonth() {
+            const nextMonth = new Date(currentDate);
+            nextMonth.setMonth(nextMonth.getMonth() + 1);
+
+            // 1 aydan fazla ileriye gidemez
+            if (nextMonth > maxDate) {
+                alert('⚠️ Rezervasyon sadece 1 ay öncesinden yapılabilir.');
+                return;
+            }
+
             currentDate.setMonth(currentDate.getMonth() + 1);
             renderCalendar();
         }
@@ -375,4 +459,5 @@
         renderCalendar();
     </script>
 </body>
+
 </html>

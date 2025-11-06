@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karaman Express - Sefer Listesi</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-600 to-blue-400">
     <!-- Header -->
     <div class="bg-white shadow-lg">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
-                <button onclick="window.location.href='index.html'" class="flex items-center gap-3 hover:opacity-80 transition">
+                <button onclick="window.location.href='index.html'"
+                    class="flex items-center gap-3 hover:opacity-80 transition">
                     <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     <h1 class="text-2xl font-bold text-gray-800">Karaman Express</h1>
                 </button>
                 <div class="text-sm text-gray-600">
-                    📞 0555 555 55 55
+                    📞 0850 123 45 67
                 </div>
             </div>
         </div>
@@ -27,9 +31,10 @@
     <!-- Breadcrumb & Back -->
     <div class="bg-white/10 backdrop-blur-sm border-b border-white/20">
         <div class="container mx-auto px-4 py-3">
-            <button onclick="window.location.href='index.html'" class="text-white hover:text-blue-200 flex items-center gap-2 transition">
+            <button onclick="window.location.href='index.html'"
+                class="text-white hover:text-blue-200 flex items-center gap-2 transition">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
                 <span class="font-medium">Yeni Arama</span>
             </button>
@@ -48,7 +53,8 @@
                         </div>
                         <div class="flex flex-col items-center gap-1">
                             <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
                             <div class="text-xs text-gray-600 font-medium" id="route-distance"></div>
                         </div>
@@ -71,17 +77,20 @@
                 <div class="flex flex-wrap items-center justify-between gap-4">
                     <div class="flex items-center gap-2 text-white">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                         <span class="font-semibold" id="trip-count">0 sefer bulundu</span>
                     </div>
                     <div class="flex gap-3">
-                        <select id="bus-type-filter" onchange="filterTrips()" class="px-4 py-2 rounded-lg bg-white text-gray-800 font-medium focus:outline-none focus:ring-2 focus:ring-blue-600">
+                        <select id="bus-type-filter" onchange="filterTrips()"
+                            class="px-4 py-2 rounded-lg bg-white text-gray-800 font-medium focus:outline-none focus:ring-2 focus:ring-blue-600">
                             <option value="all">Tüm Otobüsler</option>
                             <option value="VIP">Sadece VIP</option>
                             <option value="Standart">Sadece Standart</option>
                         </select>
-                        <select id="sort-filter" onchange="sortTrips()" class="px-4 py-2 rounded-lg bg-white text-gray-800 font-medium focus:outline-none focus:ring-2 focus:ring-blue-600">
+                        <select id="sort-filter" onchange="sortTrips()"
+                            class="px-4 py-2 rounded-lg bg-white text-gray-800 font-medium focus:outline-none focus:ring-2 focus:ring-blue-600">
                             <option value="time">Saate Göre</option>
                             <option value="price-low">Fiyat (Düşükten Yükseğe)</option>
                             <option value="price-high">Fiyat (Yüksekten Düşüğe)</option>
@@ -101,15 +110,39 @@
         <!-- Sefer Bulunamadı -->
         <div id="no-trips" class="max-w-5xl mx-auto text-center py-12 hidden">
             <svg class="w-20 h-20 text-white/50 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <h3 class="text-2xl font-bold text-white mb-2">Sefer Bulunamadı</h3>
             <p class="text-blue-100 mb-6">Seçtiğiniz kriterlere uygun sefer bulunmamaktadır.</p>
-            <button onclick="window.location.href='index.html'" class="bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-blue-50 transition">
+            <button onclick="window.location.href='index.html'"
+                class="bg-white text-blue-600 px-6 py-3 rounded-lg font-bold hover:bg-blue-50 transition">
                 Yeni Arama Yap
             </button>
         </div>
     </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            // Firebase Console'dan aldığınız config buraya gelecek (index.html ile aynı)
+            apiKey: "AIzaSyD7hCepYSGIR9WPbTQQ9UhivBQr9IxQFfc",
+            authDomain: "karaman-express.firebaseapp.com",
+            projectId: "karaman-express",
+            storageBucket: "karaman-express.firebasestorage.app",
+            messagingSenderId: "675458442911",
+            appId: "1:675458442911:web:ca7d007b71649d0da864aa"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        window.db = db;
+        window.firestoreModules = { collection, query, where, getDocs };
+    </script>
 
     <script>
         // Rota mesafeleri, süreleri ve durakları
@@ -122,7 +155,7 @@
             'Karaman-Eskişehir': { distance: '450 km', duration: '6 saat', price: 400, stops: ['Konya', 'Ankara'] },
             'Karaman-Samsun': { distance: '700 km', duration: '9 saat', price: 520, stops: ['Ankara', 'Çorum'] },
             'Karaman-Tokat': { distance: '600 km', duration: '8 saat', price: 480, stops: ['Ankara', 'Çorum'] },
-            
+
             'Ankara-İstanbul': { distance: '450 km', duration: '5.5 saat', price: 400, stops: ['Bolu'] },
             'Ankara-İzmir': { distance: '590 km', duration: '7 saat', price: 450, stops: ['Eskişehir', 'Afyon'] },
             'Ankara-Adana': { distance: '480 km', duration: '6 saat', price: 420, stops: ['Kırıkkale', 'Kayseri'] },
@@ -131,7 +164,7 @@
             'Ankara-Samsun': { distance: '420 km', duration: '5 saat', price: 380, stops: ['Çorum'] },
             'Ankara-Tokat': { distance: '440 km', duration: '5.5 saat', price: 390, stops: ['Çorum'] },
             'Ankara-Karaman': { distance: '280 km', duration: '4 saat', price: 350, stops: ['Konya'] },
-            
+
             'İstanbul-İzmir': { distance: '470 km', duration: '6 saat', price: 450, stops: ['Bursa', 'Balıkesir'] },
             'İstanbul-Ankara': { distance: '450 km', duration: '5.5 saat', price: 400, stops: ['Bolu'] },
             'İstanbul-Adana': { distance: '930 km', duration: '12 saat', price: 650, stops: ['Ankara', 'Aksaray', 'Niğde'] },
@@ -140,35 +173,35 @@
             'İstanbul-Samsun': { distance: '710 km', duration: '9 saat', price: 550, stops: ['Bolu', 'Çorum'] },
             'İstanbul-Tokat': { distance: '730 km', duration: '9.5 saat', price: 570, stops: ['Bolu', 'Çorum'] },
             'İstanbul-Karaman': { distance: '650 km', duration: '8 saat', price: 500, stops: ['Bolu', 'Eskişehir', 'Konya'] },
-            
+
             'İzmir-Ankara': { distance: '590 km', duration: '7 saat', price: 450, stops: ['Afyon', 'Eskişehir'] },
             'İzmir-İstanbul': { distance: '470 km', duration: '6 saat', price: 450, stops: ['Balıkesir', 'Bursa'] },
             'İzmir-Adana': { distance: '850 km', duration: '11 saat', price: 600, stops: ['Afyon', 'Konya'] },
             'İzmir-Konya': { distance: '570 km', duration: '7 saat', price: 450, stops: ['Afyon'] },
             'İzmir-Eskişehir': { distance: '350 km', duration: '4.5 saat', price: 350, stops: [] },
             'İzmir-Karaman': { distance: '750 km', duration: '10 saat', price: 550, stops: ['Manisa', 'Afyon', 'Konya'] },
-            
+
             'Adana-Ankara': { distance: '480 km', duration: '6 saat', price: 420, stops: ['Kayseri', 'Kırıkkale'] },
             'Adana-İstanbul': { distance: '930 km', duration: '12 saat', price: 650, stops: ['Niğde', 'Aksaray', 'Ankara'] },
             'Adana-Konya': { distance: '350 km', duration: '4.5 saat', price: 350, stops: [] },
             'Adana-Karaman': { distance: '220 km', duration: '3 saat', price: 280, stops: [] },
-            
+
             'Konya-Ankara': { distance: '260 km', duration: '3 saat', price: 300, stops: [] },
             'Konya-İstanbul': { distance: '660 km', duration: '8 saat', price: 500, stops: ['Ankara', 'Eskişehir'] },
             'Konya-Eskişehir': { distance: '330 km', duration: '4 saat', price: 320, stops: [] },
             'Konya-Karaman': { distance: '100 km', duration: '1.5 saat', price: 150, stops: [] },
             'Konya-Adana': { distance: '350 km', duration: '4.5 saat', price: 350, stops: [] },
-            
+
             'Eskişehir-Ankara': { distance: '230 km', duration: '2.5 saat', price: 250, stops: [] },
             'Eskişehir-İstanbul': { distance: '310 km', duration: '4 saat', price: 320, stops: [] },
             'Eskişehir-Konya': { distance: '330 km', duration: '4 saat', price: 320, stops: [] },
             'Eskişehir-Karaman': { distance: '450 km', duration: '6 saat', price: 400, stops: ['Ankara', 'Konya'] },
-            
+
             'Samsun-Ankara': { distance: '420 km', duration: '5 saat', price: 380, stops: ['Çorum'] },
             'Samsun-İstanbul': { distance: '710 km', duration: '9 saat', price: 550, stops: ['Çorum', 'Bolu'] },
             'Samsun-Tokat': { distance: '130 km', duration: '2 saat', price: 180, stops: [] },
             'Samsun-Karaman': { distance: '700 km', duration: '9 saat', price: 520, stops: ['Çorum', 'Ankara'] },
-            
+
             'Tokat-Ankara': { distance: '440 km', duration: '5.5 saat', price: 390, stops: ['Çorum'] },
             'Tokat-İstanbul': { distance: '730 km', duration: '9.5 saat', price: 570, stops: ['Çorum', 'Bolu'] },
             'Tokat-Samsun': { distance: '130 km', duration: '2 saat', price: 180, stops: [] },
@@ -191,9 +224,9 @@
         let filteredTrips = [];
 
         // Sayfa yüklendiğinde
-        window.onload = function() {
+        window.onload = function () {
             const searchData = JSON.parse(localStorage.getItem('searchData'));
-            
+
             if (!searchData) {
                 window.location.href = 'index.html';
                 return;
@@ -296,11 +329,10 @@
                             
                             <div class="flex-1 min-w-[200px]">
                                 <div class="flex items-center gap-2 mb-2">
-                                    <span class="px-3 py-1 rounded-full text-sm font-bold ${
-                                        trip.busType === 'VIP' 
-                                            ? 'bg-purple-100 text-purple-700' 
-                                            : 'bg-blue-100 text-blue-700'
-                                    }">
+                                    <span class="px-3 py-1 rounded-full text-sm font-bold ${trip.busType === 'VIP'
+                        ? 'bg-purple-100 text-purple-700'
+                        : 'bg-blue-100 text-blue-700'
+                    }">
                                         ${trip.busType}
                                     </span>
                                     <span class="text-green-600 text-sm font-semibold flex items-center gap-1">
@@ -340,20 +372,20 @@
 
         function filterTrips() {
             const busTypeFilter = document.getElementById('bus-type-filter').value;
-            
+
             if (busTypeFilter === 'all') {
                 filteredTrips = [...allTrips];
             } else {
                 filteredTrips = allTrips.filter(trip => trip.busType === busTypeFilter);
             }
-            
+
             sortTrips();
         }
 
         function sortTrips() {
             const sortType = document.getElementById('sort-filter').value;
-            
-            switch(sortType) {
+
+            switch (sortType) {
                 case 'time':
                     filteredTrips.sort((a, b) => a.time.localeCompare(b.time));
                     break;
@@ -364,7 +396,7 @@
                     filteredTrips.sort((a, b) => b.price - a.price);
                     break;
             }
-            
+
             displayTrips();
         }
 
@@ -374,4 +406,5 @@
         }
     </script>
 </body>
+
 </html>

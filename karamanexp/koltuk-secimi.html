@@ -18,7 +18,7 @@
                     <h1 class="text-2xl font-bold text-gray-800">Karaman Express</h1>
                 </button>
                 <div class="text-sm text-gray-600">
-                    📞 0555 555 55 55
+                    📞 0850 123 45 67
                 </div>
             </div>
         </div>
@@ -215,14 +215,36 @@
         </div>
     </div>
 
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            // Firebase Console'dan aldığınız config buraya gelecek (index.html ile aynı)
+            apiKey: "AIzaSyD7hCepYSGIR9WPbTQQ9UhivBQr9IxQFfc",
+            authDomain: "karaman-express.firebaseapp.com",
+            projectId: "karaman-express",
+            storageBucket: "karaman-express.firebasestorage.app",
+            messagingSenderId: "675458442911",
+            appId: "1:675458442911:web:ca7d007b71649d0da864aa"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        window.db = db;
+        window.firestoreModules = { collection, query, where, getDocs };
+    </script>
+
     <script>
         const tripData = JSON.parse(localStorage.getItem('selectedTrip'));
         const searchData = JSON.parse(localStorage.getItem('searchData'));
         
         let selectedSeat = null;
         let passengerGender = null;
-        let occupiedSeats = [];
-        let femaleSeats = [];
+        let occupiedSeats = []; // Firebase'den gelecek
+        let femaleSeats = []; // Firebase'den gelecek
 
         if (!tripData || !searchData) {
             window.location.href = 'index.html';
@@ -247,59 +269,138 @@
 
         document.getElementById('total-seats').textContent = totalSeats;
 
-        // Rastgele dolu koltuklar oluştur
-        function generateOccupiedSeats() {
-            const occupiedCount = Math.floor(totalSeats * 0.25);
-            const seats = new Set();
-            while (seats.size < occupiedCount) {
-                seats.add(Math.floor(Math.random() * totalSeats) + 1);
-            }
-            return Array.from(seats);
-        }
+        // SADECE Firebase'den gerçek dolu koltukları yükle
+        loadOccupiedSeats();
 
-        // Rastgele kadın yolcu koltukları
-        function generateFemaleSeats(occupied) {
-            const femaleCount = Math.floor(totalSeats * 0.15);
-            const seats = new Set();
-            while (seats.size < femaleCount) {
-                const seat = Math.floor(Math.random() * totalSeats) + 1;
-                if (!occupied.includes(seat)) {
-                    seats.add(seat);
+        async function loadOccupiedSeats() {
+            console.log('🔍 Firebase bağlantısı kontrol ediliyor...');
+            
+            // Firebase yüklenene kadar bekle
+            let attempts = 0;
+            while (!window.firestoreModules && attempts < 20) {
+                console.log('⏳ Firebase yükleniyor... (' + (attempts + 1) + '/20)');
+                await new Promise(resolve => setTimeout(resolve, 300));
+                attempts++;
+            }
+
+            if (!window.firestoreModules) {
+                console.error('❌ Firebase modülleri yüklenemedi!');
+                console.log('💡 Çözüm: Firebase config ayarlarınızı kontrol edin');
+                
+                // Firebase olmadan devam et - tüm koltuklar boş
+                occupiedSeats = [];
+                femaleSeats = [];
+                renderSeats();
+                return;
+            }
+
+            if (!window.db) {
+                console.error('❌ Firebase database bağlantısı yok!');
+                occupiedSeats = [];
+                femaleSeats = [];
+                renderSeats();
+                return;
+            }
+
+            const { collection, query, where, getDocs } = window.firestoreModules;
+
+            try {
+                console.log('✅ Firebase bağlantısı başarılı!');
+                console.log('📊 Sefer bilgileri:', {
+                    from: tripData.from,
+                    to: tripData.to,
+                    date: tripData.date.date,
+                    time: tripData.time,
+                    busType: tripData.busType
+                });
+
+                const reservationsRef = collection(window.db, 'reservations');
+                const q = query(
+                    reservationsRef,
+                    where('from', '==', tripData.from),
+                    where('to', '==', tripData.to),
+                    where('date', '==', tripData.date.date),
+                    where('time', '==', tripData.time),
+                    where('busType', '==', tripData.busType)
+                );
+
+                console.log('🔎 Firestore sorgusu çalıştırılıyor...');
+                const querySnapshot = await getDocs(q);
+                
+                // Temiz listeler
+                occupiedSeats = [];
+                femaleSeats = [];
+
+                if (querySnapshot.empty) {
+                    console.log('✅ Bu sefer için rezervasyon yok - Tüm koltuklar boş');
+                } else {
+                    console.log('✅ ' + querySnapshot.size + ' rezervasyon bulundu:');
+                    
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        console.log('  📌 Koltuk ' + data.seatNumber + ' - ' + data.fullname + ' (' + data.gender + ')');
+                        
+                        occupiedSeats.push(data.seatNumber);
+                        
+                        if (data.gender === 'Kadın') {
+                            femaleSeats.push(data.seatNumber);
+                        }
+                    });
                 }
+
+                console.log('📋 Dolu koltuklar:', occupiedSeats.length > 0 ? occupiedSeats : 'Yok');
+                console.log('👩 Kadın yolcu koltukları:', femaleSeats.length > 0 ? femaleSeats : 'Yok');
+
+                // Koltukları oluştur
+                renderSeats();
+                
+            } catch (error) {
+                console.error('❌ Firebase sorgu hatası:', error);
+                console.error('Hata detayı:', error.code, error.message);
+                
+                if (error.code === 'failed-precondition') {
+                    console.error('💡 Firestore Database henüz oluşturulmamış. Firebase Console\'dan oluşturun.');
+                } else if (error.code === 'permission-denied') {
+                    console.error('💡 Firestore kuralları erişimi engelliyor. Test mode\'a geçin.');
+                }
+                
+                // Hata olsa da devam et - tüm koltuklar boş
+                occupiedSeats = [];
+                femaleSeats = [];
+                renderSeats();
             }
-            return Array.from(seats);
         }
 
-        occupiedSeats = generateOccupiedSeats();
-        femaleSeats = generateFemaleSeats(occupiedSeats);
+        function renderSeats() {
+            const seatsContainer = document.getElementById('seats-container');
+            seatsContainer.innerHTML = '';
+            
+            let seatNumber = 0;
 
-        // Koltukları oluştur
-        const seatsContainer = document.getElementById('seats-container');
-        let seatNumber = 0;
-
-        for (let row = 0; row < rows; row++) {
-            const rowDiv = document.createElement('div');
-            rowDiv.className = 'flex items-center justify-center gap-3';
-            
-            // Sol koltuklar
-            for (let i = 0; i < layout[0]; i++) {
-                seatNumber++;
-                rowDiv.appendChild(createSeat(seatNumber));
+            for (let row = 0; row < rows; row++) {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'flex items-center justify-center gap-3';
+                
+                // Sol koltuklar
+                for (let i = 0; i < layout[0]; i++) {
+                    seatNumber++;
+                    rowDiv.appendChild(createSeat(seatNumber));
+                }
+                
+                // Koridor
+                const corridor = document.createElement('div');
+                corridor.className = 'w-8 flex items-center justify-center';
+                corridor.innerHTML = '<div class="w-0.5 h-12 bg-gray-300"></div>';
+                rowDiv.appendChild(corridor);
+                
+                // Sağ koltuklar
+                for (let i = 0; i < layout[1]; i++) {
+                    seatNumber++;
+                    rowDiv.appendChild(createSeat(seatNumber));
+                }
+                
+                seatsContainer.appendChild(rowDiv);
             }
-            
-            // Koridor
-            const corridor = document.createElement('div');
-            corridor.className = 'w-8 flex items-center justify-center';
-            corridor.innerHTML = '<div class="w-0.5 h-12 bg-gray-300"></div>';
-            rowDiv.appendChild(corridor);
-            
-            // Sağ koltuklar
-            for (let i = 0; i < layout[1]; i++) {
-                seatNumber++;
-                rowDiv.appendChild(createSeat(seatNumber));
-            }
-            
-            seatsContainer.appendChild(rowDiv);
         }
 
         function createSeat(num) {

@@ -18,7 +18,7 @@
                     <h1 class="text-2xl font-bold text-gray-800">Karaman Express</h1>
                 </button>
                 <div class="text-sm text-gray-600">
-                    📞 0555 555 55 55
+                    📞 0850 123 45 67
                 </div>
             </div>
         </div>
@@ -266,6 +266,28 @@
         </div>
     </div>
 
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            // Firebase Console'dan aldığınız config buraya gelecek (index.html ile aynı)
+            apiKey: "AIzaSyD7hCepYSGIR9WPbTQQ9UhivBQr9IxQFfc",
+            authDomain: "karaman-express.firebaseapp.com",
+            projectId: "karaman-express",
+            storageBucket: "karaman-express.firebasestorage.app",
+            messagingSenderId: "675458442911",
+            appId: "1:675458442911:web:ca7d007b71649d0da864aa"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        window.db = db;
+        window.firestoreModules = { collection, addDoc, serverTimestamp };
+    </script>
+
     <script>
         const tripData = JSON.parse(localStorage.getItem('selectedTrip'));
         const seatData = JSON.parse(localStorage.getItem('selectedSeatData'));
@@ -309,7 +331,7 @@
             e.target.value = e.target.value.replace(/\D/g, '');
         });
 
-        function completeBooking() {
+        async function completeBooking() {
             const fullname = document.getElementById('fullname').value.trim();
             const tcno = document.getElementById('tcno').value.trim();
             const phone = document.getElementById('phone').value.trim();
@@ -367,19 +389,120 @@
                 return;
             }
 
-            // Yolcu bilgilerini kaydet
-            const passengerInfo = {
-                fullname: fullname,
-                tcno: tcno,
-                phone: phone,
-                email: email,
-                gender: seatData.gender
-            };
+            // Firebase'e kaydet
+            try {
+                console.log('🔍 Firebase bağlantısı kontrol ediliyor...');
+                
+                // Firebase modüllerini bekle
+                let attempts = 0;
+                while (!window.firestoreModules && attempts < 20) {
+                    console.log('⏳ Firebase yükleniyor... (' + (attempts + 1) + '/20)');
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                    attempts++;
+                }
 
-            localStorage.setItem('passengerInfo', JSON.stringify(passengerInfo));
-            
-            // Başarılı rezervasyon sayfasına yönlendir
-            window.location.href = 'rezervasyon-onay.html';
+                if (!window.firestoreModules) {
+                    console.error('❌ Firebase modülleri yüklenemedi!');
+                    alert('⚠️ Veritabanı bağlantısı kurulamadı. Rezervasyon kaydedilemedi.\n\nYine de devam etmek ister misiniz?');
+                    // Yine de devam et
+                    const passengerInfo = {
+                        fullname: fullname,
+                        tcno: tcno,
+                        phone: phone,
+                        email: email,
+                        gender: seatData.gender
+                    };
+                    localStorage.setItem('passengerInfo', JSON.stringify(passengerInfo));
+                    window.location.href = 'rezervasyon-onay.html';
+                    return;
+                }
+
+                if (!window.db) {
+                    console.error('❌ Firebase database bağlantısı yok!');
+                    alert('⚠️ Veritabanı bağlantısı kurulamadı.');
+                    return;
+                }
+
+                console.log('✅ Firebase bağlantısı başarılı!');
+
+                const { collection, addDoc, serverTimestamp } = window.firestoreModules;
+
+                // Rezervasyon verisi
+                const reservationData = {
+                    // Sefer bilgileri
+                    from: tripData.from,
+                    to: tripData.to,
+                    date: tripData.date.date,
+                    time: tripData.time,
+                    busType: tripData.busType,
+                    
+                    // Koltuk bilgisi
+                    seatNumber: parseInt(seatData.seatNumber), // Number olarak kaydet
+                    
+                    // Yolcu bilgileri
+                    fullname: fullname,
+                    tcno: tcno,
+                    phone: phone,
+                    email: email,
+                    gender: seatData.gender,
+                    
+                    // Fiyat
+                    price: tripData.price,
+                    
+                    // Duraklar (varsa)
+                    stops: tripData.stops || [],
+                    
+                    // Zaman damgası
+                    createdAt: serverTimestamp(),
+                    
+                    // PNR kodu
+                    pnr: 'KE' + Date.now().toString().slice(-8)
+                };
+
+                console.log('💾 Firebase\'e kaydediliyor:', reservationData);
+
+                // Firestore'a kaydet
+                const docRef = await addDoc(collection(window.db, 'reservations'), reservationData);
+                
+                console.log('✅ Rezervasyon başarıyla kaydedildi!');
+                console.log('📄 Document ID:', docRef.id);
+                console.log('🎫 PNR Kodu:', reservationData.pnr);
+
+                // Yolcu bilgilerini localStorage'a kaydet (onay sayfası için)
+                const passengerInfo = {
+                    fullname: fullname,
+                    tcno: tcno,
+                    phone: phone,
+                    email: email,
+                    gender: seatData.gender
+                };
+
+                localStorage.setItem('passengerInfo', JSON.stringify(passengerInfo));
+                
+                // Başarılı rezervasyon sayfasına yönlendir
+                console.log('✅ Onay sayfasına yönlendiriliyor...');
+                window.location.href = 'rezervasyon-onay.html';
+
+            } catch (error) {
+                console.error('❌ Firebase kayıt hatası:', error);
+                console.error('Hata kodu:', error.code);
+                console.error('Hata mesajı:', error.message);
+                console.error('Hata detayları:', error);
+                
+                let errorMessage = 'Rezervasyon kaydedilirken bir hata oluştu:\n\n';
+                
+                if (error.code === 'permission-denied') {
+                    errorMessage += '🔒 Yetki hatası: Firebase Rules ayarlarını kontrol edin.\nRules sekmesinde "allow read, write: if true;" olmalı.';
+                } else if (error.code === 'unavailable') {
+                    errorMessage += '🌐 Bağlantı hatası: İnternet bağlantınızı kontrol edin.';
+                } else if (error.code === 'failed-precondition') {
+                    errorMessage += '⚙️ Firebase Firestore Database oluşturulmamış.';
+                } else {
+                    errorMessage += error.message;
+                }
+                
+                alert('⚠️ ' + errorMessage);
+            }
         }
     </script>
 </body>
