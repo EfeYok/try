@@ -46,7 +46,7 @@
                     <h1 class="text-2xl font-bold text-gray-800">Karaman Express</h1>
                 </div>
                 <div class="text-sm text-gray-600">
-                    📞 0850 123 45 67
+                    📞 0555 555 55 55
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@
                         <!-- Nereye -->
                         <div class="relative">
                             <label class="block text-sm font-semibold text-gray-700 mb-2">
-                                <svg class="w-4 h-4 inline mr-1 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-4 h-4 inline mr-1 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
                                         clip-rule="evenodd" />
@@ -184,8 +184,8 @@
                                 <div class="text-center text-xs font-semibold text-gray-600 py-2">Çar</div>
                                 <div class="text-center text-xs font-semibold text-gray-600 py-2">Per</div>
                                 <div class="text-center text-xs font-semibold text-gray-600 py-2">Cum</div>
-                                <div class="text-center text-xs font-semibold text-red-600 py-2">Cmt</div>
-                                <div class="text-center text-xs font-semibold text-red-600 py-2">Paz</div>
+                                <div class="text-center text-xs font-semibold text-blue-600 py-2">Cmt</div>
+                                <div class="text-center text-xs font-semibold text-blue-600 py-2">Paz</div>
                             </div>
                             <!-- Tarihler -->
                             <div id="calendar-days" class="grid grid-cols-7 gap-2"></div>
@@ -208,13 +208,13 @@
                             <option value="2">2 Yolcu</option>
                             <option value="3">3 Yolcu</option>
                             <option value="4">4 Yolcu</option>
-                            <option value="5">5 Yolcu</option>
                         </select>
+                        <p class="text-xs text-gray-500 mt-1">Maksimum 4 kişi için bilet alabilirsiniz</p>
                     </div>
 
                     <!-- Arama Butonu -->
                     <button onclick="searchTrips()"
-                        class="w-full bg-red-600 hover:bg-red-700 text-white py-4 px-6 rounded-lg font-bold text-lg transition-all shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center gap-2">
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 px-6 rounded-lg font-bold text-lg transition-all shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center justify-center gap-2">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -274,7 +274,7 @@
             projectId: "karaman-express",
             storageBucket: "karaman-express.firebasestorage.app",
             messagingSenderId: "675458442911",
-            appId: "1:675458442911:web:ca7d007b71649d0da864aa"
+            appId: "1:675458442911:web:ca7d007b71649d0da864aa"  
         };
 
         const app = initializeApp(firebaseConfig);
@@ -456,7 +456,11 @@
         }
 
         // Sayfa yüklendiğinde takvimi oluştur
-        renderCalendar();
+        window.onload = function () {
+            // Bugünün ayından başla
+            currentDate = new Date();
+            renderCalendar();
+        };
     </script>
 </body>
 

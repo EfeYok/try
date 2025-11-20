@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Karaman Express - Koltuk Seçimi</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-600 to-blue-400">
     <!-- Header -->
     <div class="bg-white shadow-lg">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
-                <button onclick="window.location.href='sefer-listesi.html'" class="flex items-center gap-3 hover:opacity-80 transition">
+                <button onclick="window.location.href='sefer-listesi.html'"
+                    class="flex items-center gap-3 hover:opacity-80 transition">
                     <svg class="w-10 h-10 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                     <h1 class="text-2xl font-bold text-gray-800">Karaman Express</h1>
                 </button>
                 <div class="text-sm text-gray-600">
-                    📞 0850 123 45 67
+                    📞 0555 555 55 55
                 </div>
             </div>
         </div>
@@ -29,30 +33,36 @@
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-center gap-2">
                 <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold text-sm">
+                    <div
+                        class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold text-sm">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
                     </div>
                     <span class="text-white text-sm font-medium hidden sm:inline">Güzergah</span>
                 </div>
                 <div class="w-12 h-1 bg-green-500"></div>
                 <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold text-sm">
+                    <div
+                        class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center font-bold text-sm">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                         </svg>
                     </div>
                     <span class="text-white text-sm font-medium hidden sm:inline">Sefer</span>
                 </div>
                 <div class="w-12 h-1 bg-blue-400"></div>
                 <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-full bg-blue-400 text-white flex items-center justify-center font-bold text-sm">3</div>
+                    <div
+                        class="w-8 h-8 rounded-full bg-blue-400 text-white flex items-center justify-center font-bold text-sm">
+                        3</div>
                     <span class="text-white text-sm font-medium hidden sm:inline">Koltuk</span>
                 </div>
                 <div class="w-12 h-1 bg-gray-400"></div>
                 <div class="flex items-center gap-2">
-                    <div class="w-8 h-8 rounded-full bg-gray-400 text-white flex items-center justify-center font-bold text-sm">4</div>
+                    <div
+                        class="w-8 h-8 rounded-full bg-gray-400 text-white flex items-center justify-center font-bold text-sm">
+                        4</div>
                     <span class="text-white text-sm font-medium hidden sm:inline">Bilgiler</span>
                 </div>
             </div>
@@ -71,9 +81,10 @@
                         <span class="text-gray-400">•</span>
                         <div class="text-blue-600 font-bold" id="time-summary"></div>
                     </div>
-                    <button onclick="window.location.href='sefer-listesi.html'" class="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1">
+                    <button onclick="window.location.href='sefer-listesi.html'"
+                        class="text-blue-600 hover:text-blue-800 font-medium flex items-center gap-1">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                         </svg>
                         Değiştir
                     </button>
@@ -96,13 +107,15 @@
                             <div class="flex items-center gap-3">
                                 <div class="w-12 h-12 bg-gray-700 rounded-lg flex items-center justify-center">
                                     <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"/>
+                                        <path
+                                            d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
                                     </svg>
                                 </div>
                                 <span class="font-bold text-gray-700">ŞOFÖR</span>
                             </div>
                             <div class="text-sm text-gray-600">
-                                <span class="font-semibold" id="selected-count">0</span> / <span id="total-seats"></span> koltuk
+                                <span class="font-semibold" id="selected-count">0</span> / <span
+                                    id="total-seats"></span> koltuk
                             </div>
                         </div>
                     </div>
@@ -138,22 +151,26 @@
             <div class="space-y-6">
                 <!-- Cinsiyet Seçimi -->
                 <div class="bg-white rounded-xl shadow-lg p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4">Yolcu Bilgisi</h3>
-                    <p class="text-sm text-gray-600 mb-4">Lütfen cinsiyetinizi seçiniz:</p>
-                    <div class="grid grid-cols-2 gap-3">
-                        <button onclick="setGender('Erkek')" id="gender-male" class="p-4 rounded-lg border-2 border-gray-300 hover:border-blue-600 hover:bg-blue-50 transition-all text-center">
-                            <div class="text-3xl mb-2">👨</div>
-                            <div class="font-bold text-gray-800">Erkek</div>
-                        </button>
-                        <button onclick="setGender('Kadın')" id="gender-female" class="p-4 rounded-lg border-2 border-gray-300 hover:border-pink-600 hover:bg-pink-50 transition-all text-center">
-                            <div class="text-3xl mb-2">👩</div>
-                            <div class="font-bold text-gray-800">Kadın</div>
-                        </button>
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Yolcu Bilgileri</h3>
+                    <div class="mb-4 p-3 bg-blue-50 rounded-lg">
+                        <p class="text-sm text-blue-800 font-semibold">
+                            📋 <span id="passenger-count-text"></span>
+                        </p>
+                        <p class="text-xs text-blue-600 mt-1">
+                            Her koltuk için ayrı cinsiyet seçimi yapabilirsiniz
+                        </p>
                     </div>
+
+                    <div id="gender-selection-area">
+                        <!-- Seçilen her koltuk için cinsiyet seçimi buraya eklenecek -->
+                    </div>
+
                     <div class="mt-4 p-3 bg-blue-50 rounded-lg">
                         <p class="text-xs text-blue-800 flex items-start gap-2">
                             <svg class="w-4 h-4 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                    clip-rule="evenodd" />
                             </svg>
                             <span>Kadın yolcuların yanındaki koltuk erkek yolcular tarafından seçilemez.</span>
                         </p>
@@ -161,23 +178,29 @@
                 </div>
 
                 <!-- Rezervasyon Özeti -->
-                <div id="summary-card" class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-lg p-6 text-white hidden">
+                <div id="summary-card"
+                    class="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl shadow-lg p-6 text-white hidden">
                     <h3 class="text-xl font-bold mb-4">Rezervasyon Özeti</h3>
                     <div class="space-y-3 mb-6">
-                        <div class="flex justify-between items-center pb-3 border-b border-white/30">
-                            <span class="text-blue-100">Seçilen Koltuk:</span>
-                            <span class="font-bold text-2xl" id="selected-seat-number"></span>
+                        <div class="pb-3 border-b border-white/30">
+                            <span class="text-blue-100">Seçilen Koltuklar:</span>
+                            <div class="font-bold text-2xl mt-1" id="selected-seats-list"></div>
                         </div>
-                        <div class="flex justify-between items-center pb-3 border-b border-white/30">
+                        <div class="pb-3 border-b border-white/30">
+                            <span class="text-blue-100">Yolcu Sayısı:</span>
+                            <span class="font-bold text-xl ml-2" id="passenger-count-display"></span>
+                        </div>
+                        <div class="pb-3 border-b border-white/30">
                             <span class="text-blue-100">Bilet Fiyatı:</span>
-                            <span class="font-bold text-xl" id="ticket-price"></span>
+                            <span class="font-bold text-xl ml-2" id="ticket-price"></span>
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-blue-100 font-semibold">Toplam:</span>
                             <span class="font-bold text-3xl" id="total-price"></span>
                         </div>
                     </div>
-                    <button onclick="continueToPayment()" class="w-full bg-white text-blue-600 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition-all shadow-lg transform hover:scale-105">
+                    <button onclick="continueToPayment()"
+                        class="w-full bg-white text-blue-600 py-4 rounded-lg font-bold text-lg hover:bg-blue-50 transition-all shadow-lg transform hover:scale-105">
                         Devam Et →
                     </button>
                 </div>
@@ -186,26 +209,37 @@
                 <div class="bg-white rounded-xl shadow-lg p-6">
                     <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center gap-2">
                         <svg class="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+                            <path fill-rule="evenodd"
+                                d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
+                                clip-rule="evenodd" />
                         </svg>
                         Önemli Bilgiler
                     </h3>
                     <ul class="space-y-2 text-sm text-gray-600">
                         <li class="flex items-start gap-2">
-                            <svg class="w-4 h-4 mt-0.5 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            <svg class="w-4 h-4 mt-0.5 text-blue-600 flex-shrink-0" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clip-rule="evenodd" />
                             </svg>
                             <span>Seçtiğiniz koltuk 15 dakika süreyle sizin için rezerve edilecektir.</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <svg class="w-4 h-4 mt-0.5 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            <svg class="w-4 h-4 mt-0.5 text-blue-600 flex-shrink-0" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clip-rule="evenodd" />
                             </svg>
                             <span>Koltuk değişikliği için bir sonraki adımda geri dönebilirsiniz.</span>
                         </li>
                         <li class="flex items-start gap-2">
-                            <svg class="w-4 h-4 mt-0.5 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            <svg class="w-4 h-4 mt-0.5 text-blue-600 flex-shrink-0" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                    clip-rule="evenodd" />
                             </svg>
                             <span>Yanınızdaki koltuğu başka bir yolcu seçebilir.</span>
                         </li>
@@ -220,8 +254,8 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
         const firebaseConfig = {
-            // Firebase Console'dan aldığınız config buraya gelecek (index.html ile aynı)
             apiKey: "AIzaSyD7hCepYSGIR9WPbTQQ9UhivBQr9IxQFfc",
             authDomain: "karaman-express.firebaseapp.com",
             projectId: "karaman-express",
@@ -232,7 +266,7 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-        
+
         window.db = db;
         window.firestoreModules = { collection, query, where, getDocs };
     </script>
@@ -240,11 +274,13 @@
     <script>
         const tripData = JSON.parse(localStorage.getItem('selectedTrip'));
         const searchData = JSON.parse(localStorage.getItem('searchData'));
-        
-        let selectedSeat = null;
-        let passengerGender = null;
+
+        let selectedSeats = []; // Birden fazla koltuk seçilebilir
+        let passengerGenders = {}; // Her koltuk için cinsiyet
         let occupiedSeats = []; // Firebase'den gelecek
         let femaleSeats = []; // Firebase'den gelecek
+
+        const passengerCount = parseInt(searchData.passengerCount) || 1;
 
         if (!tripData || !searchData) {
             window.location.href = 'index.html';
@@ -257,9 +293,8 @@
 
         const busTypeBadge = document.getElementById('bus-type-badge');
         busTypeBadge.textContent = tripData.busType;
-        busTypeBadge.className = `px-4 py-2 rounded-full font-bold text-sm ${
-            tripData.busType === 'VIP' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'
-        }`;
+        busTypeBadge.className = `px-4 py-2 rounded-full font-bold text-sm ${tripData.busType === 'VIP' ? 'bg-purple-100 text-purple-700' : 'bg-blue-100 text-blue-700'
+            }`;
 
         // Koltuk düzeni
         const isVIP = tripData.busType === 'VIP';
@@ -269,12 +304,15 @@
 
         document.getElementById('total-seats').textContent = totalSeats;
 
+        // Yolcu sayısını göster
+        document.getElementById('passenger-count-text').textContent = passengerCount + ' yolcu için koltuk seçimi yapılacak';
+
         // SADECE Firebase'den gerçek dolu koltukları yükle
         loadOccupiedSeats();
 
         async function loadOccupiedSeats() {
             console.log('🔍 Firebase bağlantısı kontrol ediliyor...');
-            
+
             // Firebase yüklenene kadar bekle
             let attempts = 0;
             while (!window.firestoreModules && attempts < 20) {
@@ -286,7 +324,7 @@
             if (!window.firestoreModules) {
                 console.error('❌ Firebase modülleri yüklenemedi!');
                 console.log('💡 Çözüm: Firebase config ayarlarınızı kontrol edin');
-                
+
                 // Firebase olmadan devam et - tüm koltuklar boş
                 occupiedSeats = [];
                 femaleSeats = [];
@@ -326,7 +364,7 @@
 
                 console.log('🔎 Firestore sorgusu çalıştırılıyor...');
                 const querySnapshot = await getDocs(q);
-                
+
                 // Temiz listeler
                 occupiedSeats = [];
                 femaleSeats = [];
@@ -335,13 +373,13 @@
                     console.log('✅ Bu sefer için rezervasyon yok - Tüm koltuklar boş');
                 } else {
                     console.log('✅ ' + querySnapshot.size + ' rezervasyon bulundu:');
-                    
+
                     querySnapshot.forEach((doc) => {
                         const data = doc.data();
                         console.log('  📌 Koltuk ' + data.seatNumber + ' - ' + data.fullname + ' (' + data.gender + ')');
-                        
+
                         occupiedSeats.push(data.seatNumber);
-                        
+
                         if (data.gender === 'Kadın') {
                             femaleSeats.push(data.seatNumber);
                         }
@@ -353,17 +391,17 @@
 
                 // Koltukları oluştur
                 renderSeats();
-                
+
             } catch (error) {
                 console.error('❌ Firebase sorgu hatası:', error);
                 console.error('Hata detayı:', error.code, error.message);
-                
+
                 if (error.code === 'failed-precondition') {
                     console.error('💡 Firestore Database henüz oluşturulmamış. Firebase Console\'dan oluşturun.');
                 } else if (error.code === 'permission-denied') {
                     console.error('💡 Firestore kuralları erişimi engelliyor. Test mode\'a geçin.');
                 }
-                
+
                 // Hata olsa da devam et - tüm koltuklar boş
                 occupiedSeats = [];
                 femaleSeats = [];
@@ -374,31 +412,31 @@
         function renderSeats() {
             const seatsContainer = document.getElementById('seats-container');
             seatsContainer.innerHTML = '';
-            
+
             let seatNumber = 0;
 
             for (let row = 0; row < rows; row++) {
                 const rowDiv = document.createElement('div');
                 rowDiv.className = 'flex items-center justify-center gap-3';
-                
+
                 // Sol koltuklar
                 for (let i = 0; i < layout[0]; i++) {
                     seatNumber++;
                     rowDiv.appendChild(createSeat(seatNumber));
                 }
-                
+
                 // Koridor
                 const corridor = document.createElement('div');
                 corridor.className = 'w-8 flex items-center justify-center';
                 corridor.innerHTML = '<div class="w-0.5 h-12 bg-gray-300"></div>';
                 rowDiv.appendChild(corridor);
-                
+
                 // Sağ koltuklar
                 for (let i = 0; i < layout[1]; i++) {
                     seatNumber++;
                     rowDiv.appendChild(createSeat(seatNumber));
                 }
-                
+
                 seatsContainer.appendChild(rowDiv);
             }
         }
@@ -406,108 +444,172 @@
         function createSeat(num) {
             const isOccupied = occupiedSeats.includes(num);
             const isFemale = femaleSeats.includes(num);
-            
+            const isSelected = selectedSeats.includes(num);
+
             const seatButton = document.createElement('button');
             seatButton.type = 'button';
-            seatButton.className = `w-12 h-14 rounded-lg font-bold text-sm transition-all transform hover:scale-110 ${
-                isOccupied 
-                    ? 'bg-gray-400 cursor-not-allowed text-white' 
-                    : isFemale
-                    ? 'bg-pink-500 hover:bg-pink-600 text-white shadow-md'
-                    : 'bg-green-500 hover:bg-green-600 text-white shadow-md'
-            }`;
+
+            let className = 'w-12 h-14 rounded-lg font-bold text-sm transition-all transform hover:scale-110 ';
+
+            if (isOccupied) {
+                className += 'bg-gray-400 cursor-not-allowed text-white';
+            } else if (isSelected) {
+                className += 'bg-blue-600 text-white shadow-xl scale-110';
+            } else if (isFemale) {
+                className += 'bg-pink-500 hover:bg-pink-600 text-white shadow-md';
+            } else {
+                className += 'bg-green-500 hover:bg-green-600 text-white shadow-md';
+            }
+
+            seatButton.className = className;
             seatButton.textContent = num;
             seatButton.disabled = isOccupied;
             seatButton.dataset.seatId = num;
             seatButton.dataset.isFemale = isFemale;
-            
+
             if (!isOccupied) {
-                seatButton.onclick = () => toggleSeat(num, seatButton, isFemale);
+                seatButton.onclick = () => toggleSeat(num, isFemale);
             }
-            
+
             return seatButton;
         }
 
-        function setGender(gender) {
-            passengerGender = gender;
-            
-            const maleBtn = document.getElementById('gender-male');
-            const femaleBtn = document.getElementById('gender-female');
-            
-            if (gender === 'Erkek') {
-                maleBtn.className = 'p-4 rounded-lg border-2 border-blue-600 bg-blue-50 transition-all text-center';
-                femaleBtn.className = 'p-4 rounded-lg border-2 border-gray-300 hover:border-pink-600 hover:bg-pink-50 transition-all text-center';
+        function toggleSeat(seatId, isFemale) {
+            // Koltuk zaten seçili mi?
+            const seatIndex = selectedSeats.indexOf(seatId);
+
+            if (seatIndex > -1) {
+                // Koltuk seçimini kaldır
+                selectedSeats.splice(seatIndex, 1);
+                delete passengerGenders[seatId];
             } else {
-                femaleBtn.className = 'p-4 rounded-lg border-2 border-pink-600 bg-pink-50 transition-all text-center';
-                maleBtn.className = 'p-4 rounded-lg border-2 border-gray-300 hover:border-blue-600 hover:bg-blue-50 transition-all text-center';
+                // Maksimum koltuk kontrolü
+                if (selectedSeats.length >= passengerCount) {
+                    alert(`⚠️ Maksimum ${passengerCount} koltuk seçebilirsiniz!`);
+                    return;
+                }
+
+                // Koltuk seç
+                selectedSeats.push(seatId);
+                selectedSeats.sort((a, b) => a - b); // Sırala
             }
-            
+
+            renderSeats();
+            updateGenderSelection();
             updateSummary();
         }
 
-        function toggleSeat(seatId, button, isFemale) {
-            if (!passengerGender) {
-                alert('⚠️ Lütfen önce cinsiyetinizi seçiniz!');
+        function updateGenderSelection() {
+            const genderArea = document.getElementById('gender-selection-area');
+            genderArea.innerHTML = '';
+
+            if (selectedSeats.length === 0) {
+                genderArea.innerHTML = '<p class="text-gray-500 text-sm text-center py-4">Önce koltuk seçiniz</p>';
                 return;
             }
-            
-            if (passengerGender === 'Erkek' && isFemale) {
-                alert('⚠️ Bu koltuk kadın yolcunun yanındadır. Lütfen başka bir koltuk seçiniz.');
-                return;
-            }
-            
-            // Önceki seçimi temizle
-            document.querySelectorAll('[data-seat-id]').forEach(btn => {
-                if (!btn.disabled && btn.dataset.seatId == selectedSeat) {
-                    const wasFemale = btn.dataset.isFemale === 'true';
-                    btn.className = `w-12 h-14 rounded-lg font-bold text-sm transition-all transform hover:scale-110 ${
-                        wasFemale
-                            ? 'bg-pink-500 hover:bg-pink-600 text-white shadow-md'
-                            : 'bg-green-500 hover:bg-green-600 text-white shadow-md'
-                    }`;
-                }
+
+            selectedSeats.forEach(seatId => {
+                const seatDiv = document.createElement('div');
+                seatDiv.className = 'mb-4 p-4 bg-gray-50 rounded-lg';
+
+                const currentGender = passengerGenders[seatId];
+                const isFemale = femaleSeats.includes(seatId);
+
+                seatDiv.innerHTML = `
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-bold text-gray-800">Koltuk ${seatId}</span>
+                        ${isFemale ? '<span class="text-xs bg-pink-100 text-pink-700 px-2 py-1 rounded">Kadın yolcu yanı</span>' : ''}
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <button 
+                            onclick="setGender(${seatId}, 'Erkek')" 
+                            id="gender-male-${seatId}" 
+                            class="p-3 rounded-lg border-2 transition-all text-center ${currentGender === 'Erkek'
+                        ? 'border-blue-600 bg-blue-50'
+                        : 'border-gray-300 hover:border-blue-600 hover:bg-blue-50'
+                    } ${isFemale ? 'opacity-50 cursor-not-allowed' : ''}"
+                            ${isFemale ? 'disabled' : ''}
+                        >
+                            <div class="text-2xl mb-1">👨</div>
+                            <div class="font-bold text-gray-800 text-sm">Erkek</div>
+                        </button>
+                        <button 
+                            onclick="setGender(${seatId}, 'Kadın')" 
+                            id="gender-female-${seatId}" 
+                            class="p-3 rounded-lg border-2 transition-all text-center ${currentGender === 'Kadın'
+                        ? 'border-pink-600 bg-pink-50'
+                        : 'border-gray-300 hover:border-pink-600 hover:bg-pink-50'
+                    }"
+                        >
+                            <div class="text-2xl mb-1">👩</div>
+                            <div class="font-bold text-gray-800 text-sm">Kadın</div>
+                        </button>
+                    </div>
+                    ${isFemale ? '<p class="text-xs text-pink-600 mt-2">⚠️ Bu koltuk kadın yolcu yanındadır</p>' : ''}
+                `;
+
+                genderArea.appendChild(seatDiv);
             });
-            
-            if (selectedSeat === seatId) {
-                selectedSeat = null;
-            } else {
-                selectedSeat = seatId;
-                button.className = 'w-12 h-14 rounded-lg font-bold text-sm transition-all transform scale-110 bg-blue-600 text-white shadow-xl';
+        }
+
+        function setGender(seatId, gender) {
+            const isFemale = femaleSeats.includes(seatId);
+
+            if (gender === 'Erkek' && isFemale) {
+                alert('⚠️ Bu koltuk kadın yolcunun yanındadır. Erkek yolcu seçemez.');
+                return;
             }
-            
+
+            passengerGenders[seatId] = gender;
+            updateGenderSelection();
             updateSummary();
         }
 
         function updateSummary() {
             const summaryCard = document.getElementById('summary-card');
             const selectedCountSpan = document.getElementById('selected-count');
-            
-            if (selectedSeat && passengerGender) {
+
+            selectedCountSpan.textContent = selectedSeats.length;
+
+            // Tüm koltuklar seçildi ve cinsiyet belirlendi mi?
+            const allGendersSelected = selectedSeats.every(seat => passengerGenders[seat]);
+            const correctCount = selectedSeats.length === passengerCount;
+
+            if (correctCount && allGendersSelected) {
                 summaryCard.classList.remove('hidden');
-                selectedCountSpan.textContent = '1';
-                document.getElementById('selected-seat-number').textContent = selectedSeat;
-                document.getElementById('ticket-price').textContent = tripData.price + ' ₺';
-                document.getElementById('total-price').textContent = tripData.price + ' ₺';
+                document.getElementById('selected-seats-list').textContent = selectedSeats.join(', ');
+                document.getElementById('passenger-count-display').textContent = passengerCount + ' Yolcu';
+                const totalPrice = tripData.price * passengerCount;
+                document.getElementById('total-price').textContent = totalPrice + ' ₺';
             } else {
                 summaryCard.classList.add('hidden');
-                selectedCountSpan.textContent = '0';
             }
         }
 
         function continueToPayment() {
-            if (!selectedSeat || !passengerGender) {
-                alert('⚠️ Lütfen koltuk ve cinsiyet seçiniz!');
+            if (selectedSeats.length !== passengerCount) {
+                alert(`⚠️ Lütfen ${passengerCount} koltuk seçiniz!`);
                 return;
             }
-            
+
+            const allGendersSelected = selectedSeats.every(seat => passengerGenders[seat]);
+            if (!allGendersSelected) {
+                alert('⚠️ Lütfen tüm koltuklar için cinsiyet seçiniz!');
+                return;
+            }
+
             const seatData = {
-                seatNumber: selectedSeat,
-                gender: passengerGender
+                seats: selectedSeats.map(seatId => ({
+                    seatNumber: seatId,
+                    gender: passengerGenders[seatId]
+                })),
+                totalPassengers: passengerCount
             };
-            
+
             localStorage.setItem('selectedSeatData', JSON.stringify(seatData));
             window.location.href = 'yolcu-bilgileri.html';
         }
     </script>
 </body>
+
 </html>
