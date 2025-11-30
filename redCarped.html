@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red Carped</title>
+    <link rel="icon" type="image/png" href="...">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff6565 0%, #b62020 100%);
+        }
+
+        a {
+            text-shadow: 2px 2px 7px #111111;
+        }
+
+        .bar {
+            background-color: rgb(141, 141, 141);
+            width: 200px;
+            border-radius: 15px;
+        }
+
+        .ins {
+            background-color: rgb(45, 184, 219);
+            color: white;
+            padding: 1%;
+            text-align: right;
+            font-size: 18px;
+            border-radius: 15px;
+            width: 10%;
+        }
+
+        p,h3 {
+            color: rgb(255, 255, 255);
+        }
+
+        .pp {
+            width: 70%;
+            display: center;
+            text-align: center;
+            margin: auto;
+        }
+
+        .bar {
+            background-color: rgb(141, 141, 141);
+            width: 200px;
+            border-radius: 15px;
+            margin-top: 17px;
+        }
+
+        .ins {
+            background-color: rgb(45, 184, 219);
+            color: white;
+            padding: 1%;
+            text-align: right;
+            font-size: 18px;
+            border-radius: 15px;
+            width: 13%;
+        }
+
+        button#st {
+            width: 35%;
+            font-size: 20px;
+            margin: auto;
+            margin-top: 12px;
+            margin-bottom: 30px;
+            color:rgb(48, 48, 48);
+            transition: 0.3s;
+            background: linear-gradient(135deg, #ffe4c4 0%, #cca473 100%);
+        }
+
+        button#st:hover {
+            color:#ff0000;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="navbar">
+            <div class="navbar-brand">🎭 Red Carped</div>
+            <div class="navbar-user" id="navbarUser"></div>
+        </div>
+
+        <div class="content-box">
+            <h2 id="welcomeMessage"></h2>
+            <p style="text-align: center; color: white; text-shadow: 1px 1px 5px #111111; margin-bottom: 30px;">
+                Sistemimize başarıyla giriş yaptın.
+                <br>
+                <a style="color:#383838a8"><ins>Buradan sonraki tüm sayfalar ingilizce gözükecek.</ins></a>
+            </p>
+
+            <div class="button-group" id="menuButtons"></div>
+        </div>
+        <div class="two">
+            <h3 id="dort">Process:</h3>
+            <br/>
+            <hr/>
+            <br/>
+            <p class="pp">
+                <img src="BocchiSticker.png" alt="emoji"
+                    style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
+                    Loading...
+            </p>
+            <div class="bar">
+                <div class="ins">9%</div>
+            </div>
+        </div>
+        <div class="two">
+            <h3 id="dort">What are we doing?:</h3>
+            <br/>
+            <hr/>
+            <br/>
+            <p class="pp" style="width: 100%;">
+                <img src="enchanted_book.png" alt="emoji"
+                    style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
+                    I'm just trying to understand Unity logics to make other games with a little bit experiance.<br/>
+                    This Game will be retro themed, have basic logics, rooted deep story...
+            </p>
+            <button onclick="window.location.href='error.html'" id="st">Story (offline)</button>
+            <br/>
+            <p class="pp">
+                📜 There will be 
+                <a href="error.html"
+                style="color:#ffeb78">rules</a>
+                 about how the game is running.<br>
+                 (offline rn)
+            </p>
+        </div>
+        <div class="two" style="margin-bottom: 200px;">
+            <h3 id="dort">Who are we?:</h3>
+            <br/>
+            <hr/>
+            <br/>
+            <p style="margin: auto;">
+                <img src="default_profile.png" alt="emoji"
+                    style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
+                    <a style="color:#c7c7c7">Bakeno</a>
+            </p>
+            <p style="margin: auto;">Game Creator</p>
+            <br/>
+            <br/>
+            <p style="margin: auto;">
+                <img src="default_profile.png" alt="emoji"
+                    style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
+                    <a style="color: #c7c7c7;">CrystalBul</a>
+            </p>
+            <p style="margin: auto;">Story Writer</p>
+            <br/>
+            <br/>
+            <p style="margin: auto;">
+                <img src="default_profile.png" alt="emoji"
+                    style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
+                    <a style="color: #c7c7c7;">Loading...</a>
+            </p>
+            <p style="margin: auto;">Art</p>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+        window.onload = function () {
+            initUserData();
+
+            // Giriş kontrolü
+            const currentUser = getCurrentUser();
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Kullanıcı bilgilerini göster
+            const isAdmin = checkIsAdmin(currentUser);
+            document.getElementById('welcomeMessage').textContent = `Hoş Geldin, ${currentUser}! 👋`;
+
+            const navbarUser = document.getElementById('navbarUser');
+            navbarUser.innerHTML = `
+                ${currentUser}
+                ${isAdmin ? '<span class="admin-badge">👑 Admin</span>' : ''}
+            `;
+
+            // Menü butonları
+            const menuButtons = document.getElementById('menuButtons');
+            let buttonsHTML = `
+                <button class="btn-info" onclick="window.location.href='profile.html'">👤 Profilim</button>
+            `;
+
+            if (isAdmin) {
+                buttonsHTML += `<button class="btn-warning" onclick="window.location.href='admin-panel.html'">⚙️ Admin Panel</button>`;
+            }
+
+            buttonsHTML += `<button class="btn-danger" onclick="cikisYap()">🚪 Çıkış Yap</button>`;
+
+            menuButtons.innerHTML = buttonsHTML;
+        };
+
+        function cikisYap() {
+            logout();
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+
+</html>
