@@ -4,16 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Red Carped</title>
+    <title>Loading...</title>
     <link rel="icon" type="image/png" href="...">
     <link rel="stylesheet" href="style.css">
     <style>
         body {
-            background: linear-gradient(135deg, #ff6565 0%, #b62020 100%);
-        }
-
-        a {
-            text-shadow: 2px 2px 7px #111111;
+            background: black;
+            font-family: monospace, 'Lucida Console';
         }
 
         .bar {
@@ -32,8 +29,9 @@
             width: 10%;
         }
 
-        p,h3 {
+        p,h3,a {
             color: rgb(255, 255, 255);
+            text-shadow: 2px 2px 7px #00ff0d;
         }
 
         .pp {
@@ -51,13 +49,13 @@
         }
 
         .ins {
-            background-color: rgb(45, 184, 219);
+            background-color: rgb(45, 219, 54);
             color: white;
             padding: 1%;
             text-align: right;
             font-size: 18px;
             border-radius: 15px;
-            width: 13%;
+            width: 10%;
         }
 
         button#st {
@@ -72,8 +70,7 @@
         }
 
         button#st:hover {
-            color:#ff0000;
-            border-radius: 10px;
+            color:#cc5c00;
         }
     </style>
 </head>
@@ -81,16 +78,14 @@
 <body>
     <div class="main-container">
         <div class="navbar">
-            <div class="navbar-brand">🎭 Red Carped</div>
+            <div class="navbar-brand">[pc] My Computer</div>
             <div class="navbar-user" id="navbarUser"></div>
         </div>
 
         <div class="content-box">
             <h2 id="welcomeMessage"></h2>
-            <p style="text-align: center; color: white; text-shadow: 1px 1px 5px #111111; margin-bottom: 30px;">
+            <p style="text-align: center; color: white; text-shadow: 1px 1px 5px #ffbebe; margin-bottom: 30px;">
                 Sistemimize başarıyla giriş yaptın.
-                <br>
-                <a style="color:#383838a8"><ins>Buradan sonraki tüm sayfalar ingilizce gözükecek.</ins></a>
             </p>
 
             <div class="button-group" id="menuButtons"></div>
@@ -101,12 +96,12 @@
             <hr/>
             <br/>
             <p class="pp">
-                <img src="carpetBottomHD.png" alt="emoji"
-                    style="width: 50px; height: 50px; vertical-align: middle; margin-right: 5px;">
-                    <a style="font-size: large;">Loading...</a>
+                <img src="BocchiSticker.png" alt="emoji"
+                    style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
+                    Loading...
             </p>
             <div class="bar">
-                <div class="ins">9%</div>
+                <div class="ins">5%</div>
             </div>
         </div>
         <div class="two">
@@ -114,20 +109,18 @@
             <br/>
             <hr/>
             <br/>
-            <p class="pp" style="width: 100%;">
+            <p class="pp">
                 <img src="enchanted_book.png" alt="emoji"
                     style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
-                    I'm just trying to understand Unity logics to make other games with a little bit experiance.<br/>
-                    This Game will be retro themed, have basic logics, rooted deep story...
+                    First of all, we need to complete a perfect story that will be the root of the game.
             </p>
-            <button onclick="window.location.href='error.html'" id="st">Story (offline)</button>
+            <button onclick="window.location.href='story-intro.html'" id="st">Story</button>
             <br/>
             <p class="pp">
                 📜 There will be 
-                <a href="error.html"
-                style="color:#ffeb78">rules</a>
-                 about how the game is running.<br>
-                 (offline rn)
+                <a href="story-rules.html"
+                style="text-shadow: 2px 2px 7px #ff6969">rules</a>
+                 about how the game is running.
             </p>
         </div>
         <div class="two" style="margin-bottom: 200px;">
@@ -138,7 +131,7 @@
             <p style="margin: auto;">
                 <img src="default_profile.png" alt="emoji"
                     style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
-                    <a style="color:#c7c7c7">Bakeno</a>
+                    <a style="color:#09ff00">Bakeno</a>
             </p>
             <p style="margin: auto;">Game Creator</p>
             <br/>
@@ -146,7 +139,7 @@
             <p style="margin: auto;">
                 <img src="default_profile.png" alt="emoji"
                     style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
-                    <a style="color: #c7c7c7;">CrystalBul</a>
+                    <a style="color: #09ff00;">CrystalBul</a>
             </p>
             <p style="margin: auto;">Story Writer</p>
             <br/>
@@ -154,7 +147,7 @@
             <p style="margin: auto;">
                 <img src="default_profile.png" alt="emoji"
                     style="width: 35px; height: 35px; vertical-align: middle; margin-right: 5px;">
-                    <a style="color: #c7c7c7;">Loading...</a>
+                    <a style="color: #09ff00;">Loading...</a>
             </p>
             <p style="margin: auto;">Art</p>
         </div>
