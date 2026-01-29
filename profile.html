@@ -19,22 +19,22 @@
         <div class="content-box">
             <h2>👤 Profil Ayarları</h2>
             <div id="myass">
-            <div style="margin-top: 30px;">
-                <h3>Kullanıcı Adını Değiştir</h3>
-                <input type="text" id="yeniNick" placeholder="Yeni Kullanıcı Adı">
-                <button class="btn-primary" onclick="kullaniciAdiDegistir()">Kullanıcı Adını Güncelle</button>
+                <div style="margin-top: 30px;">
+                    <h3>Kullanıcı Adını Değiştir</h3>
+                    <input type="text" id="yeniNick" placeholder="Yeni Kullanıcı Adı">
+                    <button class="btn-primary" onclick="kullaniciAdiDegistir()">Kullanıcı Adını Güncelle</button>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3>Şifreni Değiştir</h3>
+                    <input type="password" id="yeniSifre" placeholder="Yeni Şifre">
+                    <input type="password" id="yeniSifreTekrar" placeholder="Yeni Şifre Tekrar">
+                    <button class="btn-primary" onclick="sifreDegistir()">Şifreyi Güncelle</button>
+                </div>
             </div>
-            
-            <div style="margin-top: 30px;">
-                <h3>Şifreni Değiştir</h3>
-                <input type="password" id="yeniSifre" placeholder="Yeni Şifre">
-                <input type="password" id="yeniSifreTekrar" placeholder="Yeni Şifre Tekrar">
-                <button class="btn-primary" onclick="sifreDegistir()">Şifreyi Güncelle</button>
-            </div>
-            </div>
-            
+
             <div id="profileMessage" class="message"></div>
-            
+
             <div class="button-group" style="margin-top: 30px;" id="menuButtons"></div>
         </div>
         <div id="loading" style="margin:auto; align-items: center; justify-content: center; display: flex;">
@@ -46,9 +46,9 @@
     <script>
         let currentUser = null;
 
-        window.onload = function() {
+        window.onload = function () {
             initUserData();
-            
+
             // Giriş kontrolü
             currentUser = getCurrentUser();
             if (!currentUser) {
@@ -72,13 +72,13 @@
             let buttonsHTML = `
                 <button class="btn-info" onclick="window.location.href='main.html'">🏠 Ana Sayfa</button>
             `;
-            
+
             if (isAdmin) {
                 buttonsHTML += `<button class="btn-warning" onclick="window.location.href='admin-panel.html'">⚙️ Admin Panel</button>`;
             }
-            
+
             buttonsHTML += `<button class="btn-danger" onclick="cikisYap()">🚪 Çıkış Yap</button>`;
-            
+
             menuButtons.innerHTML = buttonsHTML;
         };
 
@@ -90,20 +90,20 @@
 
         function kullaniciAdiDegistir() {
             const yeniNick = document.getElementById('yeniNick').value.trim();
-            
+
             if (!yeniNick) {
                 showMessage('Kullanıcı adı boş olamaz!', false);
                 return;
             }
-            
+
             if (yeniNick === currentUser) {
                 showMessage('Yeni kullanıcı adı eskisiyle aynı!', false);
                 return;
             }
-            
+
             const result = updateUsername(currentUser, yeniNick);
             showMessage(result.message, result.success);
-            
+
             if (result.success) {
                 currentUser = yeniNick;
                 setCurrentUser(yeniNick);
@@ -116,25 +116,25 @@
         function sifreDegistir() {
             const yeniSifre = document.getElementById('yeniSifre').value;
             const yeniSifreTekrar = document.getElementById('yeniSifreTekrar').value;
-            
+
             if (!yeniSifre || !yeniSifreTekrar) {
                 showMessage('Tüm alanları doldurun!', false);
                 return;
             }
-            
+
             if (yeniSifre !== yeniSifreTekrar) {
                 showMessage('Şifreler eşleşmiyor!', false);
                 return;
             }
-            
+
             if (yeniSifre.length < 4) {
                 showMessage('Şifre en az 4 karakter olmalı!', false);
                 return;
             }
-            
+
             const result = updatePassword(currentUser, yeniSifre);
             showMessage(result.message, result.success);
-            
+
             if (result.success) {
                 document.getElementById('yeniSifre').value = '';
                 document.getElementById('yeniSifreTekrar').value = '';
